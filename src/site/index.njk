@@ -1,0 +1,8 @@
+---
+layout: layouts/base
+---
+
+<h1>Hello World!</h1>
+{% for activity in activities %}
+  <a href="activity/{{ activity.id }}">{{ activity.name }}</a>
+{% endfor %}

@@ -4,10 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "dev": "eleventy --serve --port=1234",
     "data": "src/strava",
     "data:dev": "nodemon src/strava --ignore db/*"
   },
   "devDependencies": {
+    "@11ty/eleventy": "^0.10.0",
     "cheerio": "^1.0.0-rc.3",
     "diskdb": "^0.1.17",
     "dotenv": "^8.2.0",
