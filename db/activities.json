@@ -1,0 +1,55 @@
+[
+  {
+    "id": 3172767183,
+    "name": "Easy 6 miles to finish up the day",
+    "type": "run",
+    "detailedType": "Run",
+    "description": "",
+    "startDateLocal": "Yesterday",
+    "distance": "6.0 mi",
+    "elevation": "246 ft",
+    "movingTime": "50:47",
+    "images": [
+      {
+        "type": "map",
+        "primary": true,
+        "caption": "Easy 6 miles to finish up the day",
+        "defaultSrc": "https://d3o5xota0a1fcr.cloudfront.net/maps/8u1sKIzzVIvWgUNdzdJn4x0u8MwwvAbRrumd4TLhmL5pikb5Tm5ouGEcni7OJ4AML2PK2rNbPnua6EV2",
+        "squareSrc": "https://d3o5xota0a1fcr.cloudfront.net/maps/iw6aafD58oVnYGSDZeJVFNitwXuj2snNYWmmvUwxI4SKbIT14n8tM4EeGhbaOIvQRUL4LQfx3UKV4EmN"
+      }
+    ],
+    "isManual": false,
+    "hasGps": true,
+    "_id": "0966348c9147456aa5d3561683bda93f"
+  },
+  {
+    "id": 3172544273,
+    "name": "I listen to the dumbest music when I spin 🤣",
+    "type": "ride",
+    "detailedType": "Ride",
+    "description": null,
+    "startDateLocal": "Yesterday",
+    "distance": "17.7 mi",
+    "elevation": "0 ft",
+    "movingTime": "45:01",
+    "images": [],
+    "isManual": true,
+    "hasGps": false,
+    "_id": "1e49d2d98ce745ba805a3f5a6febc30e"
+  },
+  {
+    "id": 3171447799,
+    "name": "Last 10 minutes of winding down was brutal today for some reason",
+    "type": "workout",
+    "detailedType": "Yoga",
+    "description": "",
+    "startDateLocal": "Yesterday",
+    "distance": "0 mi",
+    "elevation": "0 ft",
+    "movingTime": "1:02:13",
+    "images": [],
+    "isManual": false,
+    "hasGps": false,
+    "_id": "ce90becb09fa4bccb38d5a4864949746"
+  }
+]

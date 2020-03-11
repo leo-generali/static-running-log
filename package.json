@@ -1,0 +1,18 @@
+{
+  "name": "static-running-log",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "data": "src/strava",
+    "data:dev": "nodemon src/strava --ignore db/*"
+  },
+  "devDependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "diskdb": "^0.1.17",
+    "dotenv": "^8.2.0",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^2.0.2",
+    "parcel-bundler": "^1.12.4"
+  }
+}
