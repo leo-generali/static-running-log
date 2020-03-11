@@ -1,8 +1,14 @@
 ---
 layout: layouts/base
 ---
+{% set activitiesByWeek = activities|byWeek %}
 
-<h1>Hello World!</h1>
-{% for activity in activities %}
-  <a href="activity/{{ activity.id }}">{{ activity.id }}</a>
+{% for week in activitiesByWeek %}
+  <div>
+  <p>Week: </p>
+  <p>{{ week[0]|firstOfWeek }} - {{ week[0]|endOfWeek }} </p>
+  {% for activity in week|reverse %}
+    <a href="activity/{{ activity.id }}">{{ activity.id }}</a>
+  {% endfor %}
+  </div>
 {% endfor %}

@@ -4,6 +4,7 @@ class Activity {
   constructor(args) {
     this.id = args.id;
     this.name = args.name;
+    this.date = args.start_date_local;
     this._distance = args.distance;
   }
 

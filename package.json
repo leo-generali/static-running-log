@@ -12,6 +12,8 @@
     "cheerio": "^1.0.0-rc.3",
     "diskdb": "^0.1.17",
     "dotenv": "^8.2.0",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.2",
     "parcel-bundler": "^1.12.4",
