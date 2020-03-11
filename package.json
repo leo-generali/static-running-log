@@ -5,8 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "eleventy --serve --port=1234",
-    "data": "src/strava",
-    "data:dev": "nodemon src/strava --ignore db/*"
+    "scrape": "node src/strava/get-data.js"
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.10.0",
@@ -15,6 +14,10 @@
     "dotenv": "^8.2.0",
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.2",
-    "parcel-bundler": "^1.12.4"
+    "parcel-bundler": "^1.12.4",
+    "strava-v3": "^2.0.5"
+  },
+  "dependencies": {
+    "strava-v3-cli-authenticator": "^0.0.1"
   }
 }

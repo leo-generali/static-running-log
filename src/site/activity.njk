@@ -7,4 +7,5 @@ pagination:
 permalink: "activity/{{ activity.id }}/index.html"
 ---
 
-<h1>Activity Page {{ activity.id }}</h1>
+<h1>{{ activity.name }}</h1>
+<p>Miles: {{ activity.miles() }}</p>
