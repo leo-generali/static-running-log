@@ -1,13 +1,18 @@
-const moment = require("moment");
-const { byWeek, firstOfWeek, endOfWeek } = require("./src/scripts/site/date");
+const {
+  byWeek,
+  firstOfWeek,
+  endOfWeek,
+  byYear
+} = require("./src/scripts/site/date");
 
 module.exports = config => {
   config.addFilter("byWeek", byWeek);
   config.addFilter("firstOfWeek", firstOfWeek);
   config.addFilter("endOfWeek", endOfWeek);
+  config.addFilter("activitiesByYear", byYear);
 
-  config.addFilter("log", node => {
-    console.log(node);
+  config.addFilter("log", content => {
+    console.log(content);
   });
 
   config.addWatchTarget("./_site/assets/*/**");

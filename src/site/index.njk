@@ -1,7 +1,13 @@
 ---
 layout: layouts/base
+pagination:
+  data: activityYears
+  size: 1
+  alias: activityYear
+permalink: "{{ activityYear }}/index.html"
 ---
-{% set activitiesByWeek = activities|byWeek %}
+{% set activitiesInYear = activities|activitiesByYear(activityYear) %}
+{% set activitiesByWeek = activitiesInYear|byWeek %}
 
 {% for week in activitiesByWeek %}
   <div>

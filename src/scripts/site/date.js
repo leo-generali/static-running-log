@@ -20,4 +20,12 @@ const endOfWeek = activity =>
     .endOf("isoWeek")
     .format("MMMM D");
 
-module.exports = { byWeek, firstOfWeek, endOfWeek };
+const byYear = (activities, year) => {
+  if (year === "/") return activities;
+  return activities.filter(activity => {
+    const date = moment(activity.date).format("YYYY");
+    return date === year;
+  });
+};
+
+module.exports = { byWeek, firstOfWeek, endOfWeek, byYear };

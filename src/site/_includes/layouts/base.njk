@@ -8,7 +8,11 @@
 </head>
 <body>
   <nav>
-    <a href="/">Home</a>
+    {% for navItem in navigation %}
+      <a href="{{ navItem.path }}">
+        {{ navItem.name }}
+      </a>
+    {% endfor %}
   </nav>
   {{ content|safe }}
 </body>
