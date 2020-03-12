@@ -1,20 +1,16 @@
 const moment = require("moment");
+const { byWeek, firstOfWeek, endOfWeek } = require("./src/scripts/site/date");
 
 module.exports = config => {
-  config.addFilter("byWeek", require("./src/scripts/by-week"));
+  config.addFilter("byWeek", byWeek);
+  config.addFilter("firstOfWeek", firstOfWeek);
+  config.addFilter("endOfWeek", endOfWeek);
+
   config.addFilter("log", node => {
     console.log(node);
   });
-  config.addFilter("firstOfWeek", activity => {
-    return moment(activity.date)
-      .startOf("isoWeek")
-      .format("MMMM D");
-  });
-  config.addFilter("endOfWeek", activity => {
-    return moment(activity.date)
-      .endOf("isoWeek")
-      .format("MMMM D");
-  });
+
+  config.addWatchTarget("./_site/assets/*/**");
 
   return {
     dir: {

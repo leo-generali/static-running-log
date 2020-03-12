@@ -4,12 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "eleventy --serve --port=1234",
+    "dev:site": "concurrently --names \"🖥️,🖌️\" \"yarn site:watch\" \"yarn site:style\"",
+    "site:watch": "eleventy --serve --port=1234",
+    "site:style": "node src/site.js",
     "scrape": "node src/strava/get-data.js"
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.10.0",
-    "cheerio": "^1.0.0-rc.3",
+    "concurrently": "^5.1.0",
     "diskdb": "^0.1.17",
     "dotenv": "^8.2.0",
     "lodash": "^4.17.15",
@@ -17,7 +19,8 @@
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.2",
     "parcel-bundler": "^1.12.4",
-    "strava-v3": "^2.0.5"
+    "strava-v3": "^2.0.5",
+    "tailwindcss": "^1.2.0"
   },
   "dependencies": {
     "strava-v3-cli-authenticator": "^0.0.1"
