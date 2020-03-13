@@ -7,14 +7,39 @@ pagination:
 permalink: "{{ activityYear }}/index.html"
 ---
 {% set activitiesInYear = activities|activitiesByYear(activityYear) %}
-{% set activitiesByWeek = activitiesInYear|byWeek %}
+{% set onHomePage = activityYear === '/' %}
 
-{% for week in activitiesByWeek %}
-  <div>
-  <p>Week: </p>
-  <p>{{ week[0]|firstOfWeek }} - {{ week[0]|endOfWeek }} </p>
-  {% for activity in week|reverse %}
-    <a href="activity/{{ activity.id }}">{{ activity.id }}</a>
-  {% endfor %}
+<section class='h-48 flex items-center'>
+  {% if onHomePage %}
+    <h1 class='font-semibold text-4xl'>
+      Leo's <span class='color-strava'>Running Log</span> 🏃‍♂️
+    </h1>
+  {% else %}
+    <h1 class='font-semibold text-4xl'>
+      Activity from <span class='color-strava'>{{ activityYear }}</span>
+    </h1>
+  {% endif %}
+</section>
+
+<section class='bg-white shadow rounded px-8 py-8'>
+{% for activitiesInWeek in activitiesInYear|byWeek %}
+  <div class='grid grid-cols-8'>
+    <span class='col-span-8'>{{ activitiesInWeek[0]|firstOfWeek }} - {{ activitiesInWeek[0]|endOfWeek }}</span>
+    {# Get each activity per day #}
+    {% set groupedActivitiesInTheWeek = activitiesInWeek|byDay %}
+
+    {#  #}
+    <div class='col-span-1'>
+      TK
+    </div>
+    
+    {% for day in range(1, 8) %}
+      <div class='col-span-1'>
+        {% if groupedActivitiesInTheWeek[day]|length > 0 %}
+          {{ groupedActivitiesInTheWeek[day]|length }}
+        {% endif %}
+      </div>
+    {% endfor %}
   </div>
 {% endfor %}
+</section>

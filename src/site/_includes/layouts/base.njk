@@ -6,14 +6,20 @@
   <title>Document</title>
   <link rel="stylesheet" href="/assets/index.css">
 </head>
-<body>
-  <nav>
-    {% for navItem in navigation %}
-      <a href="{{ navItem.path }}">
-        {{ navItem.name }}
-      </a>
-    {% endfor %}
+<body class='text-gray-900 leading-normal bg-gray-100'>
+  <nav class='fixed left-0 h-full w-32 bg-white shadow'>
+    <ul>
+      {% for navItem in navigation %}
+      <li>
+        <a href="{{ navItem.path }}">
+          {{ navItem.name }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
   </nav>
-  {{ content|safe }}
+  <main class='w-full max-w-screen-lg mx-auto px-6'>
+    {{ content|safe }}
+  </main>
 </body>
 </html>

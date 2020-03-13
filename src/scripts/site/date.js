@@ -10,6 +10,15 @@ const byWeek = activities => {
   return Object.values(groups);
 };
 
+const byDay = activities => {
+  const groups = _.groupBy(activities, data => {
+    const date = moment(data.date);
+    return date.format("E");
+  });
+
+  return groups;
+};
+
 const firstOfWeek = activity =>
   moment(activity.date)
     .startOf("isoWeek")
@@ -28,4 +37,4 @@ const byYear = (activities, year) => {
   });
 };
 
-module.exports = { byWeek, firstOfWeek, endOfWeek, byYear };
+module.exports = { byWeek, byDay, firstOfWeek, endOfWeek, byYear };
