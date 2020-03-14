@@ -1,11 +1,13 @@
 {% macro key(activityKey) %}
   <nav class='mt-16'>
     <h2 class='font-semibold text-2xl mb-8'>Key:</h2>
-    <div class='grid grid-cols-4 gap-6'>
+    <div class='grid grid-cols-6 gap-4'>
       {% for key in activityKey %}
-        <div class='text-center text-sm uppercase rounded font-semibold text-{{ key.textColor }} bg-{{ key.bgColor }} py-2'>
-          {{ key.activity }}
+        <div class='bg-{{ key.bgColor }} h-8 rounded'>
         </div>
+        <p class='text-left text-sm uppercase rounded font-semibold flex items-center'>
+          = {{ key.activity }}
+        </p>
       {% endfor %}
     </div>
   </nav>

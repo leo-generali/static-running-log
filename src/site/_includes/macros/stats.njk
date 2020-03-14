@@ -7,7 +7,10 @@
       <p class='text-sm uppercase font-semibold'>miles {{ timeframe }}</p>
     </div>
     <div class='bg-white shadow rounded p-8'>
-      {{ stats.acuteToChronicRatio }}
+      <p class='font-semibold text-2xl text-strava'>
+        {{ stats.acuteToChronicRatio | round(2) }}
+      </p>
+      <p class='text-sm uppercase font-semibold'>Acute / Chronic</p>
     </div>
     <div class='bg-white shadow rounded p-8'>
       TK

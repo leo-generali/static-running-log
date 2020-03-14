@@ -3,8 +3,6 @@ const _ = require("lodash");
 const Week = require("./Week");
 const Activity = require("./Activity");
 
-const WEEKS_IN_A_YEAR = [...Array(52).keys()].map(x => x++);
-
 class ActivityGroup {
   constructor(activities) {
     this._activities = activities;
