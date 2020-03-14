@@ -44,22 +44,37 @@ permalink: "{{ activityMonthUrl }}/index.html"
   </div>
 </nav>
 
-{# TODO: Get the actual activites/day showing up #}
 <section class='bg-white shadow rounded p-8 mt-16'>
   {{ calendar.days(7) }}
   {{ calendar.seperator() }}
   {% set month = activitesInMonth.calendar() %}
   <div class='grid grid-cols-7 gap-2'>
-    {% for day in range(1, month.daysInMonth + 1) %}
-      {% if loop.first %}
-        <div class='col-start-{{ month.firstDayOfMonth | int  }} text-center'>
-          {{ day }}
+    {% for day in month.calendar %}
+      <div class='
+        {% if loop.first %}
+          col-start-{{ month.firstDayOfMonth | int  }}
+        {% endif %}
+        col-span-1 text-center h-32 border rounded relative overflow-hidden flex flex-col justify-center'>
+
+        {# Show the running activities in a month #}
+        {% for activity in day %}
+          {% if activity.type === 'run' %}
+            <a href="/activity/{{ activity.id }}" 
+              class='
+                block rounded bg-indigo-400 text-white transition duration-100
+                hover:bg-indigo-600
+              '>
+              <span>{{ activity.miles() }}</span>
+              <span class='uppercase text-xs'>mi</span>
+            </a>
+          {% endif %}
+        {% endfor %}
+
+        {# Show the number of the day in the corner #}
+        <div class='absolute top-0 left-0 block bg-strava w-8 text-white rounded-br'>
+          {{ loop.index }}
         </div>
-      {% else %}
-        <div class='col-span-1 text-center'>
-          {{ day }}
-        </div>
-      {% endif %}
+      </div>
     {% endfor %}
   </div>
 </section>
