@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ meta.title }}</title>
+  <title>
+    {% if pageMeta.title %}
+      {{ pageMeta.title }} | {{ meta.title }}
+    {% else %}
+      {{ meta.title }}
+    {% endif %}
+  </title>
   <link rel="stylesheet" href="/assets/index.css">
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 </head>
@@ -20,6 +26,13 @@
     </ul>
   </nav>
   <main class='w-full max-w-screen-lg mx-auto px-6 pb-24'>
+    {% if pageTitle %}
+      <header class='h-48 flex items-center'>
+        <h1 class='font-semibold text-4xl'>
+          {{ pageTitle | safe }}
+        </h1>
+      </header>
+    {% endif %}
     {{ content|safe }}
   </main>
 </body>

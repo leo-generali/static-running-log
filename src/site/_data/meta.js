@@ -1,3 +1,3 @@
 module.exports = {
-  title: `Leo's Running Log 🏃‍♂️`
+  title: `Leo's Running Log`
 };
