@@ -31,6 +31,28 @@ class ActivityGroup {
     return Object.values(groups).map(week => new Week(week));
   }
 
+  calendar() {
+    const date = moment(this._activities[0].date);
+
+    const firstDayOfMonth = date.startOf("month").format("E");
+    const daysInMonth = date.daysInMonth();
+
+    const calendar = this._groupActivitiesByDay(daysInMonth);
+
+    return { firstDayOfMonth, daysInMonth, calendar };
+  }
+
+  _groupActivitiesByDay(daysInMonth) {
+    return [...Array(daysInMonth).keys()].map(day => {
+      const dayOfMonth = day + 1;
+      const activitiesInDay = this._activities.filter(activity => {
+        return moment(activity.date).format("D") == dayOfMonth;
+      });
+
+      return activitiesInDay;
+    });
+  }
+
   _runStats() {
     let milesRun = 0;
     let timeRun = 0;

@@ -1,0 +1,15 @@
+{% macro days() %}
+  <div class='grid grid-cols-8 gap-2'>
+    {% set daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ] %}
+    <div class="col-span-1"></div>
+    {% for dayOfWeek in daysOfWeek %}
+      <div class="col-span-1 text-center">
+        <span class='uppercase font-semibold text-xs'>{{ dayOfWeek }}</span>
+      </div>
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+{% macro seperator() %}
+  <div class='h-px w-full bg-strava my-8'></div>
+{% endmacro %}

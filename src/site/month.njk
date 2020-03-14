@@ -7,6 +7,7 @@ pagination:
 permalink: "{{ activityMonthUrl }}/index.html"
 ---
 {% import 'macros/stats.njk' as stats %}
+{% import 'macros/calendar.njk' as calendar %}
 
 {% set year = activityMonthUrl | split('/') | first %}
 {% set month = activityMonthUrl | split('/') | last %}
@@ -42,3 +43,12 @@ permalink: "{{ activityMonthUrl }}/index.html"
     {% endfor %}
   </div>
 </nav>
+
+<section class='bg-white shadow rounded p-8 mt-8'>
+  {{ calendar.days() }}
+  {{ calendar.seperator() }}
+  {% set month = activitesInMonth.calendar() %}
+  <div class='grid grid-cols-8 gap-2'>
+    <div class='col-start-{{ month.firstDayOfMonth | int + 1 }}'>TK</div>
+  </div>
+</section>
