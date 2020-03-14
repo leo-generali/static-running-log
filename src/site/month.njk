@@ -11,7 +11,7 @@ permalink: "{{ activityMonthUrl }}/index.html"
 {% set year = activityMonthUrl | split('/') | first %}
 {% set month = activityMonthUrl | split('/') | last %}
 {% set activitesInMonth = activities|activitiesByMonth(activityMonthUrl) %}
-
+{% set activitiesInYear = activities|activitiesByYear(year) %}
 
 <section class='h-48 flex items-center'>
   <h1 class='font-semibold text-4xl'>
@@ -20,3 +20,25 @@ permalink: "{{ activityMonthUrl }}/index.html"
 </section>
 
 {{ stats.wrapper(activitesInMonth.stats(), "in " + monthMap[month].short + " " + year ) }}
+
+<nav class='py-8'>
+  <h2 class='font-semibold text-2xl mb-8'>Month:</h2>
+  <div class='grid grid-cols-6 gap-6'>
+    {% for monthIndex in activitiesInYear.months() %}
+      {% set calendarUrl = "/" + year + "/" + monthIndex + "/" %}
+      <a 
+        href="{{ calendarUrl }}" 
+        class='
+          col-span-1 bg-white p-2 shadow text-center transform duration-100 rounded
+          hover:-translate-y-1 hover:shadow-lg
+          {% if calendarUrl === page.url %}
+            bg-indigo-400 text-white hover:bg-indigo-600
+          {% else %}
+            bg-white text-indigo-400 hover:text-indigo-600
+          {% endif %}'
+      >
+        <span class='font-semibold uppercase text-sm'>{{ monthMap[monthIndex].short }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</nav>
