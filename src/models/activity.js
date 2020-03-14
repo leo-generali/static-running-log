@@ -5,12 +5,14 @@ class Activity {
     this.id = args.id;
     this.name = args.name;
     this.date = args.start_date_local;
+    this.type = args.type.toLowerCase();
+    this.moving_time = args.moving_time;
     this._distance = args.distance;
   }
 
   miles() {
     const miles = this._distance / METERS_PER_MILE;
-    return (Math.round(miles * 100) / 100).toFixed(2);
+    return parseFloat((Math.round(miles * 100) / 100).toFixed(2));
   }
 }
 

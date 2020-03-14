@@ -7,4 +7,4 @@ const navigation = years.map(year => {
   };
 });
 
-module.exports = navigation;
+module.exports = [...navigation, { path: "/about", name: "about" }];

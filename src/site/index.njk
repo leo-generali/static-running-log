@@ -21,25 +21,44 @@ permalink: "{{ activityYear }}/index.html"
   {% endif %}
 </section>
 
-<section class='bg-white shadow rounded px-8 py-8'>
-{% for activitiesInWeek in activitiesInYear|byWeek %}
-  <div class='grid grid-cols-8'>
-    <span class='col-span-8'>{{ activitiesInWeek[0]|firstOfWeek }} - {{ activitiesInWeek[0]|endOfWeek }}</span>
-    {# Get each activity per day #}
-    {% set groupedActivitiesInTheWeek = activitiesInWeek|byDay %}
-
-    {#  #}
-    <div class='col-span-1'>
-      TK
-    </div>
-    
-    {% for day in range(1, 8) %}
-      <div class='col-span-1'>
-        {% if groupedActivitiesInTheWeek[day]|length > 0 %}
-          {{ groupedActivitiesInTheWeek[day]|length }}
-        {% endif %}
-      </div>
-    {% endfor %}
+<section class='py-8 grid grid-cols-4 gap-8'>
+{% set statsOfAll = activitiesInYear.stats() %}
+  <div class='bg-white shadow rounded p-8'>
+    <p class='font-semibold text-2xl color-strava'>
+      {{ statsOfAll.run.miles }}
+    </p>
+    <p class='text-sm uppercase font-semibold'>
+      {% if onHomePage %}
+        miles so far
+      {% else %}
+        miles in {{ activityYear }}
+      {% endif %}
+    </p>
   </div>
-{% endfor %}
+  <div class='bg-white shadow rounded p-8'>
+    TK
+  </div>
+  <div class='bg-white shadow rounded p-8'>
+    TK
+  </div>
+  <div class='bg-white shadow rounded p-8'>
+    TK
+  </div>
+</section>
+
+<section class='bg-white shadow rounded p-8'>
+  {% for week in activitiesInYear.byWeek() %}
+    <div>
+      <span class='text-sm uppercase'>{{ week.weekStartAndEnd() }}</span>
+    </div>
+    <div class='grid grid-cols-8 gap-2 {% if not loop.last %}mb-4{% endif %}'>
+    {% set stats = week.stats() %}
+      <div class='col-span-1'>
+        <span class='text-2xl'>
+          <span class='font-semibold'>{{ stats.run.miles }}</span>
+          <span class='text-sm font-light uppercase'>mi</span>
+        </span>
+      </div>
+    </div>
+  {% endfor %}
 </section>
