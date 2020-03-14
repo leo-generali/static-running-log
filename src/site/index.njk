@@ -6,52 +6,54 @@ pagination:
   alias: activityYear
 permalink: "{{ activityYear }}/index.html"
 ---
+{% import 'macros/stats.njk' as stats %}
+
 {% set activitiesInYear = activities|activitiesByYear(activityYear) %}
 {% set onHomePage = activityYear === '/' %}
 
 <section class='h-48 flex items-center'>
   {% if onHomePage %}
     <h1 class='font-semibold text-4xl'>
-      Leo's <span class='color-strava'>Running Log</span> 🏃‍♂️
+      Leo's <span class='text-strava'>Running Log</span> 🏃‍♂️
     </h1>
   {% else %}
     <h1 class='font-semibold text-4xl'>
-      Activity from <span class='color-strava'>{{ activityYear }}</span>
+      Activity from <span class='text-strava'>{{ activityYear }}</span>
     </h1>
   {% endif %}
 </section>
 
-<section class='py-8 grid grid-cols-4 gap-8'>
-{% set statsOfAll = activitiesInYear.stats() %}
-  <div class='bg-white shadow rounded p-8'>
-    <p class='font-semibold text-2xl color-strava'>
-      {{ statsOfAll.run.miles }}
-    </p>
-    <p class='text-sm uppercase font-semibold'>
-      {% if onHomePage %}
-        miles so far
-      {% else %}
-        miles in {{ activityYear }}
-      {% endif %}
-    </p>
-  </div>
-  <div class='bg-white shadow rounded p-8'>
-    TK
-  </div>
-  <div class='bg-white shadow rounded p-8'>
-    TK
-  </div>
-  <div class='bg-white shadow rounded p-8'>
-    TK
-  </div>
-</section>
+{{ stats.wrapper(activitiesInYear.stats(), "so far" if onHomePage else "in " + activityYear ) }}
 
-<section class='bg-white shadow rounded p-8'>
+{% if not onHomePage %}
+  <nav class='py-8'>
+    <h2 class='font-semibold text-2xl mb-8'>Month:</h2>
+    <div class='grid grid-cols-6 gap-6'>
+      {% for monthIndex in activitiesInYear.months() %}
+        <a href="/{{ activityYear }}/{{ monthIndex }}" class='col-span-1 bg-white p-2 shadow text-center transform duration-100 rounded hover:-translate-y-1 hover:shadow-lg'>
+          <span class='font-semibold uppercase text-sm text-indigo-400'>{{ monthMap[monthIndex].short }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </nav>
+{% endif %}
+
+<section class='bg-white shadow rounded p-8 mt-8'>
+  <div class='grid grid-cols-8 gap-2'>
+    {% set daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ] %}
+    <div class="col-span-1"></div>
+    {% for dayOfWeek in daysOfWeek %}
+      <div class="col-span-1 text-center">
+        <span class='uppercase font-semibold text-xs'>{{ dayOfWeek }}</span>
+      </div>
+    {% endfor %}
+  </div>
+  <div class='h-px w-full bg-strava my-8'></div>
   {% for week in activitiesInYear.byWeek() %}
     <div>
       <span class='text-sm uppercase'>{{ week.weekStartAndEnd() }}</span>
     </div>
-    <div class='grid grid-cols-8 gap-2 {% if not loop.last %}mb-4{% endif %}'>
+    <div class='grid grid-cols-8 gap-2 {% if not loop.last %}mb-12{% endif %}'>
     {% set stats = week.stats() %}
       <div class='col-span-1'>
         <span class='text-2xl'>
@@ -59,6 +61,19 @@ permalink: "{{ activityYear }}/index.html"
           <span class='text-sm font-light uppercase'>mi</span>
         </span>
       </div>
+      {% for day in range(1, 8) %}
+        {% set runsForTheDay = week.runs(day) %}
+        <ul class="col-span-1">
+          {% for run in runsForTheDay %}
+            <li>
+              <a href="/activity/{{ run.id }}" class='transition duration-100 hover:text-gray-900 text-gray-600'>
+                <span class=''>{{ run.miles() }}</span>
+                <span class='uppercase text-xs'>mi</span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endfor%}
     </div>
   {% endfor %}
 </section>

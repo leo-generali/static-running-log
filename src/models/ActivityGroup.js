@@ -13,6 +13,15 @@ class ActivityGroup {
     return { run };
   }
 
+  months() {
+    const months = _.groupBy(this._activities, data => {
+      const date = moment(data.date);
+      return date.format("M");
+    });
+
+    return Object.keys(months);
+  }
+
   byWeek() {
     const groups = _.groupBy(this._activities, data => {
       const date = moment(data.date);

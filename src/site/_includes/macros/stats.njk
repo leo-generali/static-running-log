@@ -1,0 +1,20 @@
+{% macro wrapper(stats, timeframe='so far') %}
+  <section class='py-8 grid grid-cols-4 gap-8'>
+    <div class='bg-white shadow rounded p-8'>
+      <p class='font-semibold text-2xl text-strava'>
+        {{ stats.run.miles }}
+      </p>
+      <p class='text-sm uppercase font-semibold'>miles {{ timeframe }}</p>
+    </div>
+    {# TODO: Fill in these with something cool #}
+    {# <div class='bg-white shadow rounded p-8'>
+      TK
+    </div>
+    <div class='bg-white shadow rounded p-8'>
+      TK
+    </div>
+    <div class='bg-white shadow rounded p-8'>
+      TK
+    </div> #}
+  </section>
+{% endmacro %}

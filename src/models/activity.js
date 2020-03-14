@@ -1,3 +1,5 @@
+const moment = require("moment");
+
 const METERS_PER_MILE = 1609.344;
 
 class Activity {
@@ -13,6 +15,10 @@ class Activity {
   miles() {
     const miles = this._distance / METERS_PER_MILE;
     return parseFloat((Math.round(miles * 100) / 100).toFixed(2));
+  }
+
+  dayOfWeek() {
+    return moment(this.date).format("E");
   }
 }
 

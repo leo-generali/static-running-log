@@ -1,4 +1,5 @@
 const moment = require("moment");
+const _ = require("lodash");
 
 class Week {
   constructor(activities) {
@@ -8,6 +9,24 @@ class Week {
   stats() {
     const run = this._runStats();
     return { run };
+  }
+
+  runs(dayIndex) {
+    const runs = this._activities.filter(activity => {
+      const isRun = activity.type === "run";
+      return isRun && activity.dayOfWeek() == dayIndex;
+    });
+
+    return runs;
+  }
+
+  dailyMileage(dayIndex) {
+    const runs = this.runs(dayIndex);
+    let miles = 0;
+    runs.forEach(run => {
+      miles = miles + run.miles;
+    });
+    return miles;
   }
 
   weekStartAndEnd() {

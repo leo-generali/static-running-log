@@ -21,6 +21,15 @@ const byDay = activities => {
   return groups;
 };
 
+const byMonth = (activities, slug) => {
+  const activitiesInMonth = activities.filter(activity => {
+    const date = moment(activity.date).format("YYYY/M");
+    return date === slug;
+  });
+
+  return new ActivityGroup(activitiesInMonth);
+};
+
 const byYear = (activities, year) => {
   if (year === "/") return new ActivityGroup(activities);
 
@@ -32,4 +41,4 @@ const byYear = (activities, year) => {
   return new ActivityGroup(activitiesInYear);
 };
 
-module.exports = { byWeek, byDay, byYear };
+module.exports = { byWeek, byDay, byMonth, byYear };

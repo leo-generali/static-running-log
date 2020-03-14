@@ -1,0 +1,22 @@
+---
+layout: layouts/base
+pagination:
+  data: activityMonthUrls
+  size: 1
+  alias: activityMonthUrl
+permalink: "{{ activityMonthUrl }}/index.html"
+---
+{% import 'macros/stats.njk' as stats %}
+
+{% set year = activityMonthUrl | split('/') | first %}
+{% set month = activityMonthUrl | split('/') | last %}
+{% set activitesInMonth = activities|activitiesByMonth(activityMonthUrl) %}
+
+
+<section class='h-48 flex items-center'>
+  <h1 class='font-semibold text-4xl'>
+    Activity from <span class='text-strava'>{{ monthMap[month].long }}</span> {{ year }}
+  </h1>
+</section>
+
+{{ stats.wrapper(activitesInMonth.stats(), "in " + monthMap[month].short + " " + year ) }}
