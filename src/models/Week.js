@@ -53,7 +53,7 @@ class Week {
     });
 
     return {
-      miles: (Math.round(milesRun * 100) / 100).toFixed(2),
+      miles: parseFloat((Math.round(milesRun * 100) / 100).toFixed(2)),
       time: timeRun
     };
   }

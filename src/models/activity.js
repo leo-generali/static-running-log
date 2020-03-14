@@ -20,6 +20,19 @@ class Activity {
   dayOfWeek() {
     return moment(this.date).format("E");
   }
+
+  static dummy(date) {
+    const dummyArgs = {
+      id: "",
+      name: "",
+      date: date,
+      type: "",
+      moving_time: "",
+      distance: ""
+    };
+
+    return new Activity(dummyArgs);
+  }
 }
 
 module.exports = Activity;
