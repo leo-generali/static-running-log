@@ -27,7 +27,7 @@ permalink: "{{ activityYear }}/index.html"
 {{ stats.wrapper(activitiesInYear.stats(), "so far" if onHomePage else "in " + activityYear ) }}
 
 {% if not onHomePage %}
-  <nav class='py-8'>
+  <nav class='mt-16'>
     <h2 class='font-semibold text-2xl mb-8'>Month:</h2>
     <div class='grid grid-cols-6 gap-6'>
       {% for monthIndex in activitiesInYear.months() %}
@@ -39,7 +39,9 @@ permalink: "{{ activityYear }}/index.html"
   </nav>
 {% endif %}
 
-<section class='bg-white shadow rounded p-8 mt-8'>
+{{ calendar.key(activityKey) }}
+
+<section class='bg-white shadow rounded p-8 mt-16'>
   {{ calendar.days() }}
   {{ calendar.seperator() }}
   {% for week in activitiesInYear.byWeek() %}
@@ -47,7 +49,7 @@ permalink: "{{ activityYear }}/index.html"
       <span class='text-sm uppercase'>{{ week.weekStartAndEnd() }}</span>
     </div>
     <div class='grid grid-cols-8 gap-2 {% if not loop.last %}mb-12{% endif %}'>
-    {% set stats = week.stats() %}
+      {% set stats = week.stats() %}
       <div class='col-span-1'>
         <span class='text-2xl'>
           <span class='font-semibold'>{{ stats.run.miles }}</span>
@@ -58,9 +60,13 @@ permalink: "{{ activityYear }}/index.html"
         {% set runsForTheDay = week.runs(day) %}
         <ul class="col-span-1">
           {% for run in runsForTheDay %}
-            <li>
-              <a href="/activity/{{ run.id }}" class='transition duration-100 hover:text-gray-900 text-gray-600'>
-                <span class=''>{{ run.miles() }}</span>
+            <li class='text-center'>
+              <a href="/activity/{{ run.id }}" 
+                class='
+                  block rounded bg-indigo-400 text-white transition duration-100
+                  hover:bg-indigo-600
+                '>
+                <span>{{ run.miles() }}</span>
                 <span class='uppercase text-xs'>mi</span>
               </a>
             </li>

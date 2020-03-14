@@ -1,7 +1,20 @@
-{% macro days() %}
-  <div class='grid grid-cols-8 gap-2'>
+{% macro key(activityKey) %}
+  <nav class='mt-16'>
+    <h2 class='font-semibold text-2xl mb-8'>Key:</h2>
+    <div class='grid grid-cols-4 gap-6'>
+      {% for key in activityKey %}
+        <div class='text-center text-sm uppercase rounded font-semibold text-{{ key.textColor }} bg-{{ key.bgColor }} py-2'>
+          {{ key.activity }}
+        </div>
+      {% endfor %}
+    </div>
+  </nav>
+{% endmacro %}
+
+{% macro days(count = 8) %}
+  <div class='grid grid-cols-{{ count }} gap-2'>
     {% set daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ] %}
-    <div class="col-span-1"></div>
+    {% if count === 8 %}<div class="col-span-1"></div>{% endif %}
     {% for dayOfWeek in daysOfWeek %}
       <div class="col-span-1 text-center">
         <span class='uppercase font-semibold text-xs'>{{ dayOfWeek }}</span>
