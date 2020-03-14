@@ -14,6 +14,8 @@ module.exports = config => {
     console.log(content);
   });
 
+  config.addPassthroughCopy("./src/site/favicon.ico");
+
   return {
     dir: {
       input: "src/site",
