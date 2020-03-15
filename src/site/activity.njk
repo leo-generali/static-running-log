@@ -12,14 +12,14 @@ permalink: "activity/{{ activity.id }}/index.html"
   {% set activityStats = 
     [
       { value: activity.miles(), text: 'miles' },
-      { value: activity.moving_time | secondsToDisplay, text: 'time' },
+      { value: activity.timeToDisplay(), text: 'time' },
       { value: activity.pace(), text: 'pace' }
     ]
   %}
 {% else %}
   {% set activityStats = 
     [
-      { value: activity.moving_time | secondsToDisplay, text: 'time' }
+      { value: activity.timeToDisplay(), text: 'time' }
     ] 
   %}
 {% endif %}

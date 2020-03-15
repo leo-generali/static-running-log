@@ -1,4 +1,5 @@
 const moment = require("moment");
+const { fromS } = require("hh-mm-ss");
 
 const METERS_PER_MILE = 1609.344;
 const MIN_PER_MILE = 26.8224;
@@ -9,7 +10,7 @@ class Activity {
     this.name = args.name;
     this.date = args.start_date_local;
     this.type = args.type.toLowerCase();
-    this.moving_time = args.moving_time;
+    this._moving_time = args.moving_time;
     this._distance = args.distance;
   }
 
@@ -25,14 +26,20 @@ class Activity {
   pace() {
     const [minutes, percent] = (
       MIN_PER_MILE /
-      (this._distance / this.moving_time)
+      (this._distance / this._moving_time)
     )
       .toString()
       .split(".");
 
     const seconds = Math.round(`.${percent}` * 60);
 
-    return `${minutes}:${seconds}`;
+    return `${minutes}:${seconds} <span class='text-black text-sm uppercase tracking-wider -ml-1'>/mi</span>`;
+  }
+
+  timeToDisplay() {
+    const string = fromS(this._moving_time, "hh:mm:ss").split(":");
+    if (string[0] === "00") return `${string[1]}:${string[2]}`;
+    return string.join(":");
   }
 
   static dummy(date) {
