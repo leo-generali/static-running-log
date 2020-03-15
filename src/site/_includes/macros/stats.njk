@@ -1,22 +1,12 @@
-{% macro wrapper(stats, timeframe='so far') %}
+{% macro wrapper(stats) %}
   <section class='grid grid-cols-4 gap-8'>
-    <div class='bg-white shadow rounded p-8'>
-      <p class='font-semibold text-2xl text-strava'>
-        {{ stats.run.miles }}
-      </p>
-      <p class='text-sm uppercase font-semibold'>miles {{ timeframe }}</p>
-    </div>
-    <div class='bg-white shadow rounded p-8'>
-      <p class='font-semibold text-2xl text-strava'>
-        {{ stats.acuteToChronicRatio | round(2) }}
-      </p>
-      <p class='text-sm uppercase font-semibold'>Acute / Chronic</p>
-    </div>
-    <div class='bg-white shadow rounded p-8'>
-      TK
-    </div>
-    <div class='bg-white shadow rounded p-8'>
-      TK
-    </div>
+    {% for stat in stats %}
+      <div class='bg-white shadow rounded p-8'>
+        <p class='font-semibold text-2xl text-strava'>
+          {{ stat.value | round(2) }}
+        </p>
+        <p class='text-sm uppercase font-semibold'>{{ stat.text }}</p>
+      </div>
+    {% endfor %}
   </section>
 {% endmacro %}

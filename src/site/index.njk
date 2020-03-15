@@ -24,7 +24,7 @@ permalink: "{{ activityYear }}/index.html"
   {% endif %}
 </section>
 
-{{ stats.wrapper(activitiesInYear.stats(), "so far" if onHomePage else "in " + activityYear ) }}
+{{ stats.wrapper(activitiesInYear.stats()) }}
 
 {% if not onHomePage %}
   <nav class='mt-16'>

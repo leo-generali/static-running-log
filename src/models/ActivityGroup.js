@@ -3,15 +3,32 @@ const _ = require("lodash");
 const Week = require("./Week");
 const Activity = require("./Activity");
 
+const ACTIVITY_GOUP_TYPE = {
+  ALL: "ACTIVITY_GROUP_ALL",
+  WEEK: "ACTIVITY_GROUP_WEEK",
+  MONTH: "ACTIVITY_GROUP_MONTH",
+  YEAR: "ACTIVITY_GROUP_YEAR"
+};
+
 class ActivityGroup {
-  constructor(activities) {
+  constructor(activities, type = ACTIVITY_GOUP_TYPE.ALL) {
     this._activities = activities;
+    this._type = type;
   }
 
   stats() {
+    const stats = [];
+
+    // Always add mileage stats for the group of time
     const run = this._runStats();
-    const acuteToChronicRatio = this._actuteToChronicRatio();
-    return { run, acuteToChronicRatio };
+    stats.push(run);
+
+    // Only calculate acute to chronic ration if on all
+    if (this._type === ACTIVITY_GOUP_TYPE.ALL) {
+      stats.push(this._actuteToChronicRatio());
+    }
+
+    return stats;
   }
 
   months() {
@@ -88,8 +105,9 @@ class ActivityGroup {
     });
 
     return {
-      miles: (Math.round(milesRun * 100) / 100).toFixed(2),
-      time: timeRun
+      value: (Math.round(milesRun * 100) / 100).toFixed(2),
+      text:
+        this._type === ACTIVITY_GOUP_TYPE.ALL ? "miles so far" : "miles in 2020"
     };
   }
 
@@ -102,8 +120,11 @@ class ActivityGroup {
       average = average + week.stats().run.miles;
     });
 
-    return latestMileage / (average / 4);
+    return {
+      value: latestMileage / (average / 4),
+      text: "Acute / Chronic"
+    };
   }
 }
 
-module.exports = ActivityGroup;
+module.exports = { ActivityGroup, ACTIVITY_GOUP_TYPE };

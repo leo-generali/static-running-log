@@ -20,9 +20,9 @@ permalink: "{{ activityMonthUrl }}/index.html"
   </h1>
 </section>
 
-{{ stats.wrapper(activitesInMonth.stats(), "in " + monthMap[month].short + " " + year) }}
+{{ stats.wrapper(activitesInMonth.stats()) }}
 
-<nav class='py-8'>
+<nav class='mt-16'>
   <h2 class='font-semibold text-2xl mb-8'>Month:</h2>
   <div class='grid grid-cols-6 gap-6'>
     {% for monthIndex in activitiesInYear.months() %}
@@ -43,6 +43,8 @@ permalink: "{{ activityMonthUrl }}/index.html"
     {% endfor %}
   </div>
 </nav>
+
+{{ calendar.key(activityKey) }}
 
 <section class='bg-white shadow rounded p-8 mt-16'>
   {{ calendar.days(7) }}
@@ -71,7 +73,7 @@ permalink: "{{ activityMonthUrl }}/index.html"
         {% endfor %}
 
         {# Show the number of the day in the corner #}
-        <div class='absolute top-0 left-0 block bg-strava w-8 text-white rounded-br'>
+        <div class='absolute top-0 left-0 block bg-gray-400 w-8 text-white rounded-br'>
           {{ loop.index }}
         </div>
       </div>

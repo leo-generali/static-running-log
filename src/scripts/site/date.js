@@ -1,6 +1,9 @@
 const moment = require("moment");
 const _ = require("lodash");
-const ActivityGroup = require("../../models/ActivityGroup");
+const {
+  ActivityGroup,
+  ACTIVITY_GOUP_TYPE
+} = require("../../models/ActivityGroup");
 const Week = require("../../models/Week");
 
 const byWeek = activities => {
@@ -27,7 +30,7 @@ const byMonth = (activities, slug) => {
     return date === slug;
   });
 
-  return new ActivityGroup(activitiesInMonth);
+  return new ActivityGroup(activitiesInMonth, ACTIVITY_GOUP_TYPE.MONTH);
 };
 
 const byYear = (activities, year) => {
@@ -38,7 +41,7 @@ const byYear = (activities, year) => {
     return date === year;
   });
 
-  return new ActivityGroup(activitiesInYear);
+  return new ActivityGroup(activitiesInYear, ACTIVITY_GOUP_TYPE.YEAR);
 };
 
 module.exports = { byWeek, byDay, byMonth, byYear };
