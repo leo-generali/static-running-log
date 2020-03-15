@@ -1,3 +1,15 @@
+// Markdown Customization
+const markdownIt = require("markdown-it");
+const markdownItAttrs = require("markdown-it-attrs");
+const markdownOptions = {
+  html: true,
+  breaks: true
+};
+
+const customEleventyMarkdownLibrary = markdownIt(markdownOptions).use(
+  markdownItAttrs
+);
+
 const {
   byWeek,
   byDay,
@@ -32,7 +44,10 @@ module.exports = config => {
 
   config.addPassthroughCopy("./src/site/favicon.ico");
 
+  config.setLibrary("md", customEleventyMarkdownLibrary);
+
   return {
+    markdownTemplateEngine: "njk",
     dir: {
       input: "src/site",
       output: "_site"

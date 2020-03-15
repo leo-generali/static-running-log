@@ -18,6 +18,8 @@
     "hh-mm-ss": "^1.2.0",
     "humanize-duration": "^3.22.0",
     "lodash": "^4.17.15",
+    "markdown-it": "^10.0.0",
+    "markdown-it-attrs": "^3.0.2",
     "moment": "^2.24.0",
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.2",
@@ -26,6 +28,7 @@
     "tailwindcss": "^1.2.0"
   },
   "dependencies": {
+    "postcss-nesting": "^7.0.1",
     "strava-v3-cli-authenticator": "^0.0.1"
   }
 }

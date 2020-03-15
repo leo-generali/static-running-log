@@ -1,6 +1,5 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
 
 .text-strava {
   color: #fc4c02;
@@ -9,3 +8,26 @@
 .bg-strava {
   background-color: #fc4c02;
 }
+
+.markdown {
+  & > * + * {
+    @apply mt-6;
+  }
+  /* & li + li,
+  & li > p + p {
+  } */
+
+  h2 {
+    @apply text-2xl font-semibold;
+  }
+
+  a {
+    @apply text-indigo-400 underline duration-100 transition font-semibold;
+  }
+
+  a:hover {
+    @apply text-indigo-600;
+  }
+}
+
+@tailwind utilities;

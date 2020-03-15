@@ -1,3 +1,5 @@
+{% set isFromMarkdown = '.md' in page.inputPath %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +25,13 @@
         </h1>
       </header>
     {% endif %}
-    {{ content|safe }}
+    {% if isFromMarkdown %}
+      <section class="bg-white shadow rounded p-8 markdown leading-relaxed">
+        {{ content|safe }}
+      </section>
+    {% else %}
+      {{ content|safe }}
+    {% endif %}
   </main>
 </body>
 </html>

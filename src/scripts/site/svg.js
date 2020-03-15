@@ -10,11 +10,13 @@ module.exports = (icon, args) => {
     }
   );
 
+  console.log({ args });
+
   const element = $(data.toString("utf8"));
 
   // Add options args come through
-  if (args.class) {
-    element.addClass(args.class);
+  if (args) {
+    if (args.class) element.addClass(args.class);
   }
 
   return element;
