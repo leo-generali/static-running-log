@@ -3,7 +3,11 @@
     {% for stat in stats %}
       <div class='bg-white shadow rounded p-8'>
         <p class='font-semibold text-2xl text-strava'>
-          {{ stat.value | round(2) }}
+          {% if stat.value | isNum %}
+            {{ stat.value | round(2) }}
+          {% else %}
+            {{ stat.value }}
+          {% endif %}
         </p>
         <p class='text-sm uppercase font-semibold'>{{ stat.text }}</p>
       </div>

@@ -1,6 +1,7 @@
 const moment = require("moment");
 
 const METERS_PER_MILE = 1609.344;
+const MIN_PER_MILE = 26.8224;
 
 class Activity {
   constructor(args) {
@@ -19,6 +20,19 @@ class Activity {
 
   dayOfWeek() {
     return moment(this.date).format("E");
+  }
+
+  pace() {
+    const [minutes, percent] = (
+      MIN_PER_MILE /
+      (this._distance / this.moving_time)
+    )
+      .toString()
+      .split(".");
+
+    const seconds = Math.round(`.${percent}` * 60);
+
+    return `${minutes}:${seconds}`;
   }
 
   static dummy(date) {

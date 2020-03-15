@@ -1,4 +1,12 @@
-const { byWeek, byDay, byMonth, byYear } = require("./src/scripts/site/date");
+const {
+  byWeek,
+  byDay,
+  byMonth,
+  byYear,
+  date
+} = require("./src/scripts/site/date");
+const time = require("./src/scripts/site/time");
+const utils = require("./src/scripts/site/utils");
 const header = require("./src/scripts/site/header");
 const svg = require("./src/scripts/site/svg");
 
@@ -8,8 +16,13 @@ module.exports = config => {
   config.addFilter("byDay", byDay);
   config.addFilter("activitiesByMonth", byMonth);
   config.addFilter("activitiesByYear", byYear);
+  config.addFilter("date", date);
   config.addFilter("svg", svg);
   config.addFilter("split", (string, separator) => string.split(separator));
+
+  Object.entries({ ...utils, ...time }).forEach(([name, func]) => {
+    config.addFilter(name, func);
+  });
 
   config.addShortcode("header", header);
 

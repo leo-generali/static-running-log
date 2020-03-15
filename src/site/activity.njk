@@ -6,6 +6,31 @@ pagination:
   alias: activity
 permalink: "activity/{{ activity.id }}/index.html"
 ---
+{% import 'macros/stats.njk' as stats %}
 
-<h1>{{ activity.name }}</h1>
-<p>Miles: {{ activity.miles() }}</p>
+{% if activity.type === 'run' %}
+  {% set activityStats = 
+    [
+      { value: activity.miles(), text: 'miles' },
+      { value: activity.moving_time | secondsToDisplay, text: 'time' },
+      { value: activity.pace(), text: 'pace' }
+    ]
+  %}
+{% else %}
+  {% set activityStats = 
+    [
+      { value: activity.moving_time | secondsToDisplay, text: 'time' }
+    ] 
+  %}
+{% endif %}
+
+<section class='h-48 flex items-center'>
+  <div>
+    <h1 class='font-semibold text-4xl'>{{ activity.name }}</h1>
+    <h2 class='text-indigo-400 font-semibold uppercase tracking-wider'>
+      {{ activity.date | date('MMMM Do, YYYY') }}
+    </h2>
+  </div>
+</section>
+
+{{ stats.wrapper(activityStats) }}
