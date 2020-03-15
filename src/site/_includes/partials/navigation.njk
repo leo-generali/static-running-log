@@ -1,0 +1,16 @@
+<nav class='w-full bg-white shadow'>
+  <ul class='flex w-full max-w-screen-lg mx-auto px-6'>
+    {% for navItem in navigation %}
+      <li class='p-2'>
+        <a class='
+          py-1 px-2 block rounded font-semibold
+          {% if (navItem.path in page.url and navItem.path | length > 1) or (navItem.path | length === page.url | length) %}
+            bg-indigo-200 text-indigo-500
+          {% endif %}'
+          href="{{ navItem.path }}">
+            {{ navItem.name }}
+          </a>
+      </li>
+    {% endfor %}
+  </ul>
+</nav>
