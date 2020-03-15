@@ -7,8 +7,9 @@
     "dev:site": "concurrently --names \"🖥️,🖌️\" \"yarn site:watch\" \"yarn site:style\"",
     "site:watch": "eleventy --serve --port=1234",
     "site:style": "node src/site.js",
-    "site:build:style": "NODE_ENV=production node src/site",
-    "site:build": "eleventy",
+
+    "site:build": "NODE_ENV=production node src/site & NODE_ENV=production eleventy",
+
     "scrape": "node src/strava/get-data.js"
   },
   "devDependencies": {
@@ -20,6 +21,7 @@
     "diskdb": "^0.1.17",
     "dotenv": "^8.2.0",
     "hh-mm-ss": "^1.2.0",
+    "html-minifier": "^4.0.0",
     "humanize-duration": "^3.22.0",
     "lodash": "^4.17.15",
     "markdown-it": "^10.0.0",

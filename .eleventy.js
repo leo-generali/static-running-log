@@ -10,6 +10,9 @@ const customEleventyMarkdownLibrary = markdownIt(markdownOptions).use(
   markdownItAttrs
 );
 
+// HTML Minify
+const htmlmin = require("html-minifier");
+
 const {
   byWeek,
   byDay,
@@ -44,6 +47,22 @@ module.exports = config => {
   config.addPassthroughCopy("./src/site/favicon.ico");
 
   config.setLibrary("md", customEleventyMarkdownLibrary);
+
+  // Minify HTML if on production
+  if (process.env.NODE_ENV === "production") {
+    config.addTransform("htmlmin", function(content, outputPath) {
+      if (outputPath.endsWith(".html")) {
+        let minified = htmlmin.minify(content, {
+          useShortDoctype: true,
+          removeComments: true,
+          collapseWhitespace: true
+        });
+        return minified;
+      }
+
+      return content;
+    });
+  }
 
   return {
     markdownTemplateEngine: "njk",
