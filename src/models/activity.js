@@ -4,13 +4,25 @@ const { fromS } = require("hh-mm-ss");
 const METERS_PER_MILE = 1609.344;
 const MIN_PER_MILE = 26.8224;
 
+const WORKOUT_TYPE_MAP = {
+  run: {
+    0: "Easy Run",
+    2: "Long Long"
+  },
+  ride: {
+    10: "Easy"
+  },
+  yoga: "Yoga"
+};
+
 class Activity {
   constructor(args) {
     this.id = args.id;
     this.name = args.name;
     this.date = args.start_date_local;
     this.type = args.type.toLowerCase();
-    this._moving_time = args.moving_time;
+    this.workoutType = args.workout_type;
+    this._movingTime = args.moving_time;
     this._distance = args.distance;
   }
 
@@ -26,7 +38,7 @@ class Activity {
   pace() {
     const [minutes, percent] = (
       MIN_PER_MILE /
-      (this._distance / this._moving_time)
+      (this._distance / this._movingTime)
     )
       .toString()
       .split(".");
@@ -37,9 +49,16 @@ class Activity {
   }
 
   timeToDisplay() {
-    const string = fromS(this._moving_time, "hh:mm:ss").split(":");
+    const string = fromS(this._movingTime, "hh:mm:ss").split(":");
     if (string[0] === "00") return `${string[1]}:${string[2]}`;
     return string.join(":");
+  }
+
+  workoutTypeDisplay() {
+    return (
+      WORKOUT_TYPE_MAP[this.type][this.workoutType] ||
+      WORKOUT_TYPE_MAP[this.type]
+    );
   }
 
   static dummy(date) {

@@ -44,8 +44,8 @@ const byYear = (activities, year) => {
   return new ActivityGroup(activitiesInYear, ACTIVITY_GOUP_TYPE.YEAR);
 };
 
-const date = (date, format) => {
+const formatDate = (date, format) => {
   return moment(date).format(format);
 };
 
-module.exports = { byWeek, byDay, byMonth, byYear, date };
+module.exports = { byWeek, byDay, byMonth, byYear, formatDate };

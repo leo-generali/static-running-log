@@ -10,8 +10,6 @@ module.exports = (icon, args) => {
     }
   );
 
-  console.log({ args });
-
   const element = $(data.toString("utf8"));
 
   // Add options args come through

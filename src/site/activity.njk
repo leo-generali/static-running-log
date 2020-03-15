@@ -8,12 +8,19 @@ permalink: "activity/{{ activity.id }}/index.html"
 ---
 {% import 'macros/stats.njk' as stats %}
 
+{% set year = activity.date | formatDate('YYYY') %}
+{% set month = activity.date | formatDate('M') %}
+{% set activeMonthUrl = "/" + year + "/" + month + "/" %}
+
+{% set activitiesInYear = activities|activitiesByYear(year) %}
+
 {% if activity.type === 'run' %}
   {% set activityStats = 
     [
       { value: activity.miles(), text: 'miles' },
       { value: activity.timeToDisplay(), text: 'time' },
-      { value: activity.pace(), text: 'pace' }
+      { value: activity.pace(), text: 'pace' },
+      { value: activity.workoutTypeDisplay(), text: 'type' }
     ]
   %}
 {% else %}
@@ -28,9 +35,15 @@ permalink: "activity/{{ activity.id }}/index.html"
   <div>
     <h1 class='font-semibold text-4xl leading-tight'>{{ activity.name }}</h1>
     <h2 class='text-indigo-400 font-semibold uppercase tracking-wider'>
-      {{ activity.date | date('MMMM Do, YYYY') }}
+      {{ activity.date | formatDate('MMMM Do, YYYY') }}
     </h2>
   </div>
 </section>
 
 {{ stats.wrapper(activityStats) }}
+
+<nav class='mt-16'>
+  <p class='font-semibold text-2xl mb-8'>Back to 
+    <a href="{{ activeMonthUrl }}" class='text-indigo-400 hover:text-indigo-600 transition duration-100 underline'>{{ activity.date | formatDate('MMMM') }}</a> activities
+  </p>
+</nav>
