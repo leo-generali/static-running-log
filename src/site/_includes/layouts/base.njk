@@ -15,9 +15,9 @@
   <link rel="stylesheet" href="/assets/index.css">
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 </head>
-<body class='text-gray-900 leading-normal bg-gray-100'>
+<body class='text-gray-900 leading-normal bg-gray-100 flex flex-col min-h-screen'>
   {% include 'partials/navigation.njk' %}
-  <main class='w-full max-w-screen-lg mx-auto px-6 pb-24'>
+  <main class='w-full max-w-screen-lg mx-auto px-6 pb-24 flex-grow'>
     {% if pageTitle %}
       <header class='h-48 flex items-center'>
         <h1 class='font-semibold text-4xl'>
@@ -33,5 +33,18 @@
       {{ content|safe }}
     {% endif %}
   </main>
+  <footer class='bg-white border-t'>
+    <div class='w-full max-w-screen-lg mx-auto px-6 py-4'>
+      <p class='uppercase text-xs'>
+        Created with <span class='text-red-400'>♥</span> by
+        <a
+          target="_blank"
+          class='text-indigo-400 hover:text-indigo-600 transition duration-100 underline font-semibold' 
+          href='https://leogenerali.com'>
+          Leo Generali
+        </a>
+      </p>
+    </div>
+  </footer>
 </body>
 </html>
