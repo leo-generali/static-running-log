@@ -1,34 +1,17 @@
 const moment = require("moment");
 const _ = require("lodash");
+const compose = require("lodash/fp/compose");
+
+// Mixing
+const { StatsMixin } = require("../mixins");
+
 const Week = require("./Week");
 const Activity = require("./Activity");
 
-const ACTIVITY_GOUP_TYPE = {
-  ALL: "ACTIVITY_GROUP_ALL",
-  WEEK: "ACTIVITY_GROUP_WEEK",
-  MONTH: "ACTIVITY_GROUP_MONTH",
-  YEAR: "ACTIVITY_GROUP_YEAR"
-};
-
-class ActivityGroup {
-  constructor(activities, type = ACTIVITY_GOUP_TYPE.ALL) {
+class Index {
+  constructor(activities, type = Index.types()["ALL"]) {
     this._activities = activities;
     this._type = type;
-  }
-
-  stats() {
-    const stats = [];
-
-    // Always add mileage stats for the group of time
-    const run = this._runStats();
-    stats.push(run);
-
-    // Only calculate acute to chronic ration if on all
-    if (this._type === ACTIVITY_GOUP_TYPE.ALL) {
-      stats.push(this._actuteToChronicRatio());
-    }
-
-    return stats;
   }
 
   months() {
@@ -93,38 +76,14 @@ class ActivityGroup {
     });
   }
 
-  _runStats() {
-    let milesRun = 0;
-    let timeRun = 0;
-
-    this._activities.forEach(activity => {
-      if (activity.type === "run") {
-        milesRun = milesRun + activity.miles();
-        timeRun = timeRun + activity.moving_time;
-      }
-    });
-
+  static types() {
     return {
-      value: (Math.round(milesRun * 100) / 100).toFixed(2),
-      text:
-        this._type === ACTIVITY_GOUP_TYPE.ALL ? "miles so far" : "miles in 2020"
-    };
-  }
-
-  _actuteToChronicRatio() {
-    const lastFourWeeks = this.byWeek().slice(0, 4);
-    const latestMileage = lastFourWeeks[0].stats().run.miles;
-
-    let average = 0;
-    lastFourWeeks.forEach(week => {
-      average = average + week.stats().run.miles;
-    });
-
-    return {
-      value: latestMileage / (average / 4),
-      text: "Acute / Chronic"
+      ALL: "ACTIVITY_GROUP_ALL",
+      WEEK: "ACTIVITY_GROUP_WEEK",
+      MONTH: "ACTIVITY_GROUP_MONTH",
+      YEAR: "ACTIVITY_GROUP_YEAR"
     };
   }
 }
 
-module.exports = { ActivityGroup, ACTIVITY_GOUP_TYPE };
+module.exports = compose(StatsMixin)(Index);

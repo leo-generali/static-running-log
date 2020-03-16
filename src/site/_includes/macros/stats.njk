@@ -3,7 +3,6 @@
     {% for stat in stats %}
       <div class='bg-white shadow rounded p-8'>
         <p class='font-semibold text-2xl text-strava'>
-          {{ stat | log }}
           {% if stat.value | isNum %}
             {{ stat.value | round(2) | safe }}
           {% else %}
