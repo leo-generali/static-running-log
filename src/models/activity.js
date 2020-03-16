@@ -1,5 +1,9 @@
 const moment = require("moment");
+const compose = require("lodash/fp/compose");
 const { fromS } = require("hh-mm-ss");
+
+// Mixins
+const { ChartMixin } = require("../mixins");
 
 const METERS_PER_MILE = 1609.344;
 const MIN_PER_MILE = 26.8224;
@@ -23,6 +27,9 @@ class Activity {
     this.date = args.start_date_local;
     this.type = args.type.toLowerCase();
     this.workoutType = args.workout_type;
+
+    // Private
+    this._laps = args.laps;
     this._movingTime = args.moving_time;
     this._distance = args.distance;
   }
@@ -78,7 +85,7 @@ class Activity {
   }
 }
 
-module.exports = Activity;
+module.exports = compose(ChartMixin)(Activity);
 
 // "resource_state": 2,
 // "athlete": { "id": 11876587, "resource_state": 1 },

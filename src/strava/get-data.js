@@ -17,7 +17,7 @@ const STRAVA_CONFIG = {
 };
 
 const saveDataToLocalDB = () => {
-  db.connect("db", ["activities"]);
+  db.connect("db", ["activities", "laps"]);
 
   authorizeStrava(STRAVA_CONFIG, async (error, token) => {
     const data = await strava.athlete.listActivities({
@@ -25,10 +25,23 @@ const saveDataToLocalDB = () => {
     });
 
     data.forEach(activity => {
+      // Get the activity ID
+      const { id } = activity;
+
       const check = db.activities.find({ id: activity.id });
+
       // If the activity doesn't already exist in the DB, save it!
       if (check.length === 0) {
+        // Get the lap information for the activity
         db.activities.save(activity);
+
+        strava.activities.listLaps(
+          { id: id, access_token: token },
+          (err, payload) => {
+            console.log(payload);
+            db.laps.save(payload);
+          }
+        );
       }
     });
   });
