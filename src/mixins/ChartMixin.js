@@ -1,5 +1,6 @@
 const CHART_WIDTH = 800;
 const CHART_HEIGHT = 300;
+const METERS_PER_LAP = 1609.34;
 
 const ChartMixin = superclass =>
   class extends superclass {
@@ -27,20 +28,31 @@ const ChartMixin = superclass =>
           lap.average_speed
         );
 
+        const x = index * width;
+        const y = CHART_HEIGHT - height - 150;
+
+        const label = this._getLabel(lap);
+
         return `
           <rect 
             width="${width - 1}"
             height="${height + 150}" 
-            x="${index * width}" 
-            y="${CHART_HEIGHT - height - 150}">
-          </rect>`;
+            x="${x}" 
+            y="${y}">
+          </rect>
+          <text 
+            text-anchor="middle"
+            x="${x + width / 2}" 
+            y="${CHART_HEIGHT - 10}" 
+            class="text-sm font-semibold text-white fill-current" >
+            ${label}
+          </text>
+          `;
       });
-
-      // const bars = this._laps.map()
 
       return `
         <svg class="chart" width="${CHART_WIDTH}" height="${CHART_HEIGHT}">
-          ${[bars].join("")}
+          ${bars.join("")}
         </svg>`;
     }
 
@@ -55,6 +67,12 @@ const ChartMixin = superclass =>
 
     _calculateBarWidth() {
       return CHART_WIDTH / this._laps.length;
+    }
+
+    _getLabel(lap) {
+      const ratio = lap.distance / METERS_PER_LAP;
+      const percentOfMileComplete = Math.round(ratio * 100) / 100;
+      return `${percentOfMileComplete} mi`;
     }
   };
 
