@@ -6,8 +6,9 @@ const MIN_PER_MILE = 26.8224;
 
 const WORKOUT_TYPE_MAP = {
   run: {
+    null: "Easy Run",
     0: "Easy Run",
-    2: "Long Long"
+    2: "Long Run"
   },
   ride: {
     10: "Easy"
@@ -55,10 +56,12 @@ class Activity {
   }
 
   workoutTypeDisplay() {
-    return (
-      WORKOUT_TYPE_MAP[this.type][this.workoutType] ||
-      WORKOUT_TYPE_MAP[this.type]
-    );
+    const isUndefined =
+      WORKOUT_TYPE_MAP[this.type][this.workoutType] === undefined;
+
+    return isUndefined
+      ? this.type
+      : WORKOUT_TYPE_MAP[this.type][this.workoutType];
   }
 
   static dummy(date) {
