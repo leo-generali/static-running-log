@@ -1,6 +1,8 @@
 const d3 = require("d3");
 const { JSDOM } = require("jsdom");
 
+const Pace = require("../models/Pace");
+
 const CHART_WIDTH = 500;
 const CHART_HEIGHT = 400;
 const MARGIN = {
@@ -33,12 +35,11 @@ const ChartMixin = superclass =>
         .append("g")
         .data(this._laps)
         .join("rect")
-        .attr("class", "bar")
+        .attr("class", "fill-current text-strava")
         .attr("x", lap => xScale(lap.name))
         .attr("y", lap => yScale(lap.average_speed))
         .attr("width", xScale.bandwidth())
-        .attr("height", lap => yScale(slowest) - yScale(lap.average_speed))
-        .style("fill", "#7472c0");
+        .attr("height", lap => yScale(slowest) - yScale(lap.average_speed));
 
       svg
         .append("g")
@@ -58,9 +59,13 @@ const ChartMixin = superclass =>
     _speeds() {
       const fastest = d3.max(this._laps, lap => lap.average_speed);
       const slowest = d3.min(this._laps, lap => lap.average_speed);
-      const difference = fastest - slowest;
 
-      return { fastest: fastest + difference, slowest: slowest - difference };
+      // We want there to be some padding between the fastest pace
+      // and the slowest pace. (Not start directly at zero).
+      const difference = fastest - slowest;
+      const padding = difference / 3;
+
+      return { fastest: fastest + padding, slowest: slowest - padding };
     }
 
     _xScale() {
@@ -89,7 +94,10 @@ const ChartMixin = superclass =>
     }
 
     _yAxis() {
-      return d3.axisLeft(this._yScale()).tickSizeOuter(0);
+      return d3
+        .axisLeft(this._yScale())
+        .tickSizeOuter(0)
+        .tickFormat(pace => Pace.metersPerSecondMinutesPerMile(pace));
     }
   };
 
