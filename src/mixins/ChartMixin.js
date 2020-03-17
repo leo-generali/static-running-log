@@ -3,15 +3,14 @@ const { JSDOM } = require("jsdom");
 
 const Pace = require("../models/Pace");
 
-const CHART_WIDTH = 500;
-const CHART_HEIGHT = 400;
+const CHART_WIDTH = 912;
+const CHART_HEIGHT = 200;
 const MARGIN = {
   top: 10,
-  right: 10,
+  right: 0,
   bottom: 20,
-  left: 35
+  left: 50
 };
-const MILE_IN_METERS = 1609.34;
 
 const ChartMixin = superclass =>
   class extends superclass {
@@ -28,8 +27,8 @@ const ChartMixin = superclass =>
       const yAxis = this._yAxis();
 
       svg
-        .attr("height", CHART_HEIGHT)
-        .attr("width", CHART_WIDTH)
+        .attr("viewBox", `0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`)
+        .attr("preserveAspectRatio", "none")
         .attr("class", "bars")
         .selectAll("rect")
         .append("g")
@@ -43,15 +42,27 @@ const ChartMixin = superclass =>
 
       svg
         .append("g")
-        .attr("class", "x-axis")
-        .attr("transform", `translate(0,${CHART_HEIGHT - MARGIN.bottom})`)
-        .call(xAxis);
+        .selectAll("text")
+        .data(this._laps)
+        .enter()
+        .append("text")
+        .text(lap => Pace.metersPerSecondMinutesPerMile(lap.average_speed))
+        .attr("text-anchor", "middle")
+        .attr("x", lap => xScale(lap.name) + xScale.bandwidth() / 2)
+        .attr("y", lap => yScale(lap.average_speed) - 5)
+        .attr("class", "font-bold tracking-widest text-xs");
 
       svg
         .append("g")
-        .attr("class", "y-axis")
+        .attr("transform", `translate(0,${CHART_HEIGHT - MARGIN.bottom})`)
+        .call(xAxis)
+        .attr("class", "font-light tracking-widest text-xs uppercase");
+
+      svg
+        .append("g")
         .attr("transform", `translate(${MARGIN.left}, 0)`)
-        .call(yAxis);
+        .call(yAxis.ticks(6))
+        .attr("class", "font-light tracking-widest text-xs uppercase");
 
       return body.node().innerHTML;
     }
@@ -72,7 +83,7 @@ const ChartMixin = superclass =>
       return d3
         .scaleBand()
         .domain(this._xDomain())
-        .range([MARGIN.left, CHART_WIDTH - MARGIN.left - MARGIN.right])
+        .range([MARGIN.left, CHART_WIDTH])
         .padding(0.5);
     }
 
@@ -86,7 +97,9 @@ const ChartMixin = superclass =>
     }
 
     _xDomain() {
-      return this._laps.map(lap => lap.name);
+      return this._laps.map(lap => {
+        return lap.name;
+      });
     }
 
     _xAxis() {

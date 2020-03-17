@@ -4,6 +4,7 @@ const { fromS } = require("hh-mm-ss");
 
 // Mixins
 const { ChartMixin } = require("../mixins");
+const Pace = require("./Pace");
 
 const METERS_PER_MILE = 1609.344;
 const MIN_PER_MILE = 26.8224;
@@ -44,16 +45,9 @@ class Activity {
   }
 
   pace() {
-    const [minutes, percent] = (
-      MIN_PER_MILE /
-      (this._distance / this._movingTime)
-    )
-      .toString()
-      .split(".");
-
-    const seconds = Math.round(`.${percent}` * 60);
-
-    return `${minutes}:${seconds} <span class='text-black text-sm uppercase tracking-wider -ml-1'>/mi</span>`;
+    return `${Pace.metersPerSecondMinutesPerMile(
+      this._distance / this._movingTime
+    )}<span class='text-black text-sm uppercase tracking-wider'>/mi</span>`;
   }
 
   timeToDisplay() {
