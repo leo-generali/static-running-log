@@ -42,7 +42,8 @@ permalink: "activity/{{ activity.id }}/index.html"
 
 {{ stats.wrapper(activityStats) }}
 
-{% if activity.type === 'run' and activity.id === 3187046303 %}
+{% if activity.type === 'run' and activity.id === 3183345233 %}
+{# {% if activity.type === 'run' %} #}
   <section class="mt-16 bg-white shadow rounded p-8">
     {{ activity.lapsBarChart() | safe }}
   </section>
