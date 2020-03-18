@@ -13,9 +13,6 @@
   & > * + * {
     @apply mt-6;
   }
-  /* & li + li,
-  & li > p + p {
-  } */
 
   h2 {
     @apply text-2xl font-semibold;

@@ -46,5 +46,8 @@
       </p>
     </div>
   </footer>
+  {% for script in scripts %}
+    <script src="/assets/scripts/{{ script }}/index.js"></script>
+  {% endfor %}
 </body>
 </html>

@@ -4,16 +4,21 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev:site": "concurrently --names \"🖥️,🖌️\" \"yarn site:watch\" \"yarn site:style\"",
+    "dev:site": "concurrently --names \"🖥️,🖌️\" \"yarn site:watch\" \"BUNDLE=site yarn site:style\"",
+    "dev:cms": "BUNDLE=cms node src/parcel.js",
     "site:watch": "eleventy --serve --port=1234",
-    "site:style": "node src/site.js",
-    "site:build": "NODE_ENV=production node src/site & NODE_ENV=production eleventy",
+    "site:style": "node src/parcel",
+    "site:build": "NODE_ENV=production node src/parcel & NODE_ENV=production eleventy",
+    "build": "NODE_ENV=production eleventy & NODE_ENV=production BUNDLE=all node src/parcel",
     "scrape": "node src/strava/get-data.js",
     "scrape:dev": "nodemon src/strava/get-data.js --ignore 'db/*.json'"
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.10.0",
     "@fullhuman/postcss-purgecss": "^2.1.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "cheerio": "^1.0.0-rc.3",
     "concurrently": "^5.1.0",
     "cssnano": "^4.1.10",
@@ -35,5 +40,13 @@
     "strava-v3": "^2.0.5",
     "strava-v3-cli-authenticator": "^0.0.1",
     "tailwindcss": "^1.2.0"
+  },
+  "dependencies": {
+    "nav": "^0.0.2",
+    "navi": "^0.14.0",
+    "navi-react": "^0.0.0",
+    "react": "^16.8.0",
+    "react-dom": "^16.13.0",
+    "react-navi": "^0.14.3"
   }
 }
