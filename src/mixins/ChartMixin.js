@@ -2,6 +2,7 @@ const d3 = require("d3");
 const { JSDOM } = require("jsdom");
 
 const Pace = require("../models/Pace");
+const Distance = require("../models/Distance");
 
 const CHART_WIDTH = 912;
 const CHART_HEIGHT = 200;
@@ -9,7 +10,7 @@ const MARGIN = {
   top: 10,
   right: 0,
   bottom: 20,
-  left: 50
+  left: 32
 };
 
 const ChartMixin = superclass =>
@@ -20,7 +21,7 @@ const ChartMixin = superclass =>
       const svg = body.append("svg");
 
       // Get the maximum value of our laps (the fastest pace we ran)
-      const { fastest, slowest } = this._speeds();
+      const { slowest } = this._speeds();
       const xScale = this._xScale();
       const yScale = this._yScale();
       const xAxis = this._xAxis();
@@ -35,7 +36,7 @@ const ChartMixin = superclass =>
         .data(this._laps)
         .join("rect")
         .attr("class", "fill-current text-strava")
-        .attr("x", lap => xScale(lap.name))
+        .attr("x", lap => xScale(lap.id))
         .attr("y", lap => yScale(lap.average_speed))
         .attr("width", xScale.bandwidth())
         .attr("height", lap => yScale(slowest) - yScale(lap.average_speed));
@@ -46,23 +47,25 @@ const ChartMixin = superclass =>
         .data(this._laps)
         .enter()
         .append("text")
-        .text(lap => Pace.metersPerSecondMinutesPerMile(lap.average_speed))
+        .text(
+          lap => `${Pace.metersPerSecondMinutesPerMile(lap.average_speed)}/mi`
+        )
         .attr("text-anchor", "middle")
-        .attr("x", lap => xScale(lap.name) + xScale.bandwidth() / 2)
+        .attr("x", lap => xScale(lap.id) + xScale.bandwidth() / 2)
         .attr("y", lap => yScale(lap.average_speed) - 5)
-        .attr("class", "font-bold tracking-widest text-xs");
+        .attr("class", "font-bold text-xs");
 
       svg
         .append("g")
         .attr("transform", `translate(0,${CHART_HEIGHT - MARGIN.bottom})`)
         .call(xAxis)
-        .attr("class", "font-light tracking-widest text-xs uppercase");
+        .attr("class", "text-xs");
 
       svg
         .append("g")
         .attr("transform", `translate(${MARGIN.left}, 0)`)
-        .call(yAxis.ticks(6))
-        .attr("class", "font-light tracking-widest text-xs uppercase");
+        .call(yAxis)
+        .attr("class", "text-xs");
 
       return body.node().innerHTML;
     }
@@ -97,13 +100,17 @@ const ChartMixin = superclass =>
     }
 
     _xDomain() {
-      return this._laps.map(lap => {
-        return lap.name;
-      });
+      return this._laps.map(lap => lap.id);
     }
 
     _xAxis() {
-      return d3.axisBottom(this._xScale()).tickSizeOuter(0);
+      return d3
+        .axisBottom(this._xScale())
+        .tickSizeOuter(0)
+        .tickFormat(lapId => {
+          const lap = this._laps.find(val => val.id === lapId);
+          return `${Distance.metersToMile(lap.distance)} mi`;
+        });
     }
 
     _yAxis() {

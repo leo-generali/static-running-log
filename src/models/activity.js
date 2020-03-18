@@ -5,9 +5,9 @@ const { fromS } = require("hh-mm-ss");
 // Mixins
 const { ChartMixin } = require("../mixins");
 const Pace = require("./Pace");
+const Distance = require("./Distance");
 
 const METERS_PER_MILE = 1609.344;
-const MIN_PER_MILE = 26.8224;
 
 const WORKOUT_TYPE_MAP = {
   run: {
@@ -36,8 +36,7 @@ class Activity {
   }
 
   miles() {
-    const miles = this._distance / METERS_PER_MILE;
-    return parseFloat((Math.round(miles * 100) / 100).toFixed(2));
+    return Distance.metersToMile(this._distance);
   }
 
   dayOfWeek() {
