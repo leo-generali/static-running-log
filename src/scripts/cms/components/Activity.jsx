@@ -4,8 +4,13 @@ import { Link } from "react-navi";
 const Activity = ({ name, id }) => {
   return (
     <div className="p-4 bg-white rounded shadow">
-      {name}
-      <Link href={`cms/${id}`}>Edit</Link>
+      <p className="text-bold">{name}</p>
+      <Link
+        href={`/cms/${id}`}
+        className="text-indigo-400  underline hover:text-indigo-600"
+      >
+        Edit
+      </Link>
     </div>
   );
 };

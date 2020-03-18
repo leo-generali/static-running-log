@@ -4,18 +4,21 @@ import { mount, route } from "navi";
 
 import activities from "../../../../db/activities";
 import Activities from "../pages/Activities";
-import Activity from "../pages/Activity";
+import ActivityEdit from "../pages/ActivityEdit";
 
 const routes = mount({
   "/cms/": route({
     getData: () => activities,
     view: <Activities />
   }),
+
   "/cms/:id": route(req => {
     const { id } = req.params;
-    const activity = activities.find(activity => activity.id === id);
+    const activity = activities.find(activity => activity.id == id);
 
-    return <Activity {...activity} />;
+    return {
+      view: <ActivityEdit {...activity} />
+    };
   })
 });
 
