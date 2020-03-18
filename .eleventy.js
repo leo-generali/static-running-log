@@ -19,10 +19,10 @@ const {
   byMonth,
   byYear,
   formatDate
-} = require("./src/scripts/site/date");
-const utils = require("./src/scripts/site/utils");
-const header = require("./src/scripts/site/header");
-const svg = require("./src/scripts/site/svg");
+} = require("./src/eleventy-scripts/date");
+const utils = require("./src/eleventy-scripts/utils");
+const header = require("./src/eleventy-scripts/header");
+const svg = require("./src/eleventy-scripts/svg");
 
 module.exports = config => {
   // Filters

@@ -1,7 +1,7 @@
 const moment = require("moment");
 const _ = require("lodash");
-const ActivityGroup = require("../../models/ActivityGroup");
-const Week = require("../../models/Week");
+const ActivityGroup = require("../models/ActivityGroup");
+const Week = require("../models/Week");
 
 const byWeek = activities => {
   const groups = _.groupBy(activities, data => {

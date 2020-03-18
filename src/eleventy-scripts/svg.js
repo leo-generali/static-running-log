@@ -4,7 +4,7 @@ const $ = require("cheerio");
 
 module.exports = (icon, args) => {
   const data = fs.readFileSync(
-    path.join(__dirname, `../../icons/${icon}.svg`),
+    path.join(__dirname, `../icons/${icon}.svg`),
     (err, contents) => {
       return contents;
     }
