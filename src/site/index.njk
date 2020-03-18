@@ -60,11 +60,14 @@ permalink: "{{ activityYear }}/index.html"
         {% set runsForTheDay = week.runs(day) %}
         <ul class="col-span-1">
           {% for run in runsForTheDay %}
+            {% set runColors = run.color() %}
             <li class='text-center'>
-              <a href="/activity/{{ run.id }}" 
+              <a href="/activity/{{ run.id }}"
                 class='
-                  block rounded bg-indigo-400 text-white transition duration-100
-                  hover:bg-indigo-600
+                  block rounded transition duration-100
+                  {{ runColors.text }}
+                  {{ runColors.bg }}
+                  {{ runColors.bgHover }}
                 '>
                 <span>{{ run.miles() }}</span>
                 <span class='uppercase text-xs'>mi</span>

@@ -6,6 +6,7 @@ const { fromS } = require("hh-mm-ss");
 const { ChartMixin } = require("../mixins");
 const Pace = require("./Pace");
 const Distance = require("./Distance");
+const activityKey = require("../site/_data/activityKey");
 
 const METERS_PER_MILE = 1609.344;
 
@@ -62,6 +63,14 @@ class Activity {
     return isUndefined
       ? this.type
       : WORKOUT_TYPE_MAP[this.type][this.workoutType];
+  }
+
+  color() {
+    const { activity, bg, bgHover, text } = activityKey.find(
+      key => key.workoutType === this.workoutType
+    );
+
+    return { activity, bg, bgHover, text };
   }
 
   static dummy(date) {

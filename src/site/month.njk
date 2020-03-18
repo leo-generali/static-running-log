@@ -61,10 +61,13 @@ permalink: "{{ activityMonthUrl }}/index.html"
         {# Show the running activities in a month #}
         {% for activity in day %}
           {% if activity.type === 'run' %}
+            {% set runColors = activity.color() %}
             <a href="/activity/{{ activity.id }}" 
               class='
-                block rounded bg-indigo-400 text-white transition duration-100
-                hover:bg-indigo-600
+                block rounded transition duration-100
+                {{ runColors.text }}
+                {{ runColors.bg }}
+                {{ runColors.bgHover }}
               '>
               <span>{{ activity.miles() }}</span>
               <span class='uppercase text-xs'>mi</span>

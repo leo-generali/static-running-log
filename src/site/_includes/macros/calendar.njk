@@ -3,11 +3,13 @@
     <h2 class='font-semibold text-2xl mb-8'>Key:</h2>
     <div class='grid grid-cols-6 gap-4'>
       {% for key in activityKey %}
-        <div class='bg-{{ key.bgColor }} h-8 rounded'>
-        </div>
-        <p class='text-left text-sm uppercase rounded font-semibold flex items-center'>
-          = {{ key.activity }}
-        </p>
+        {% if not key.hidden %}
+          <div class='{{ key.bg }} h-8 rounded'>
+          </div>
+          <p class='text-left text-sm uppercase rounded font-semibold flex items-center'>
+            = {{ key.activity }}
+          </p>
+        {% endif %}
       {% endfor %}
     </div>
   </nav>
