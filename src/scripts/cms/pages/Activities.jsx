@@ -7,8 +7,8 @@ const Activities = () => {
   const data = route.data;
   const activities = Object.values(data).sort((activityA, activityB) => {
     const dateA = Date.parse(activityA.start_date_local);
-    const dateB = Date.parse(activityA.start_date_local);
-    return dateA - dateB;
+    const dateB = Date.parse(activityB.start_date_local);
+    return dateB - dateA;
   });
 
   return (
