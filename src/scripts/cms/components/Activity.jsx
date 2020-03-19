@@ -3,7 +3,7 @@ import { Link } from "react-navi";
 
 const Activity = ({ name, id }) => {
   return (
-    <div className="p-4 bg-white rounded shadow">
+    <React.Fragment>
       <p className="text-bold">{name}</p>
       <Link
         href={`/cms/${id}`}
@@ -11,7 +11,7 @@ const Activity = ({ name, id }) => {
       >
         Edit
       </Link>
-    </div>
+    </React.Fragment>
   );
 };
 

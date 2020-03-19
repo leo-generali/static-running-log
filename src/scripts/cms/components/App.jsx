@@ -7,7 +7,7 @@ import Activities from "../pages/Activities";
 import ActivityEdit from "../pages/ActivityEdit";
 
 const routes = mount({
-  "/cms/": route({
+  "/cms": route({
     getData: () => activities,
     view: <Activities />
   }),
