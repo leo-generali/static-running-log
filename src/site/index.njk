@@ -57,19 +57,19 @@ permalink: "{{ activityYear }}/index.html"
         </span>
       </div>
       {% for day in range(1, 8) %}
-        {% set runsForTheDay = week.runs(day) %}
+        {% set activitiesInTheDay = week.runs(day) %}
         <ul class="col-span-1">
-          {% for run in runsForTheDay %}
-            {% set runColors = run.color() %}
+          {% for activity in activitiesInTheDay %}
+            {% set activityColor = activity.color() %}
             <li class='text-center'>
-              <a href="/activity/{{ run.id }}"
+              <a href="/activity/{{ activity.id }}"
                 class='
                   block rounded transition duration-100
-                  {{ runColors.text }}
-                  {{ runColors.bg }}
-                  {{ runColors.bgHover }}
+                  {{ activityColor.text }}
+                  {{ activityColor.bg }}
+                  {{ activityColor.bgHover }}
                 '>
-                <span>{{ run.miles() }}</span>
+                <span>{{ activity.miles() }}</span>
                 <span class='uppercase text-xs'>mi</span>
               </a>
             </li>

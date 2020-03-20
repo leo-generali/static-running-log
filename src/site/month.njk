@@ -58,7 +58,6 @@ permalink: "{{ activityMonthUrl }}/index.html"
         {% endif %}
         col-span-1 text-center h-32 border rounded relative overflow-hidden flex flex-col justify-center'>
 
-        {# Show the running activities in a month #}
         {% for activity in day %}
           {% if activity.type === 'run' %}
             {% set runColors = activity.color() %}
@@ -75,7 +74,6 @@ permalink: "{{ activityMonthUrl }}/index.html"
           {% endif %}
         {% endfor %}
 
-        {# Show the number of the day in the corner #}
         <div class='absolute top-0 left-0 block bg-gray-400 w-8 text-white rounded-br'>
           {{ loop.index }}
         </div>

@@ -42,7 +42,6 @@ permalink: "activity/{{ activity.id }}/index.html"
 
 {{ stats.wrapper(activityStats) }}
 
-{# {% if activity.type === 'run' and activity.id === 3187046303 %} #}
 {% if activity.type === 'run' %}
   <section class="mt-16 bg-white shadow rounded p-8">
     <h2 class='font-semibold text-xl leading-tight mb-4'>Splits</h2>
@@ -50,8 +49,8 @@ permalink: "activity/{{ activity.id }}/index.html"
   </section>
 {% endif %}
 
-<nav class='mt-16'>
+{# <nav class='mt-16'>
   <p class='font-semibold text-2xl mb-8'>Back to 
     <a href="{{ activeMonthUrl }}" class='text-indigo-400 hover:text-indigo-600 transition duration-100 underline'>{{ activity.date | formatDate('MMMM') }}</a> activities
   </p>
-</nav>
+</nav> #}

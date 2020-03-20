@@ -8,8 +8,6 @@ const Pace = require("./Pace");
 const Distance = require("./Distance");
 const activityKey = require("../site/_data/activityKey");
 
-const METERS_PER_MILE = 1609.344;
-
 const WORKOUT_TYPE_MAP = {
   run: {
     null: "Easy Run",

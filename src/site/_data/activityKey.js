@@ -1,5 +1,13 @@
 module.exports = [
   {
+    workoutType: undefined,
+    activity: "Easy Run",
+    bg: "bg-indigo-400",
+    bgHover: "hover:bg-indigo-600",
+    text: "text-white",
+    hidden: true
+  },
+  {
     workoutType: null,
     activity: "Easy Run",
     bg: "bg-indigo-400",
