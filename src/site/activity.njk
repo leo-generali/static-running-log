@@ -42,6 +42,13 @@ permalink: "activity/{{ activity.id }}/index.html"
 
 {{ stats.wrapper(activityStats) }}
 
+{% if activity.hasCMSData('description') %}
+  <section class="mt-16 bg-white shadow rounded p-8">
+    <h2 class='font-semibold text-xl leading-tight mb-4'>Notes</h2>
+    {{ activity.cmsData('description') }}
+  </section>
+{% endif %}
+
 {% if activity.type === 'run' %}
   <section class="mt-16 bg-white shadow rounded p-8">
     <h2 class='font-semibold text-xl leading-tight mb-4'>Splits</h2>

@@ -3,7 +3,7 @@ const compose = require("lodash/fp/compose");
 const { fromS } = require("hh-mm-ss");
 
 // Mixins
-const { ChartMixin } = require("../mixins");
+const { ChartMixin, ActivityCMSMixin } = require("../mixins");
 const Pace = require("./Pace");
 const Distance = require("./Distance");
 const activityKey = require("../site/_data/activityKey");
@@ -85,7 +85,7 @@ class Activity {
   }
 }
 
-module.exports = compose(ChartMixin)(Activity);
+module.exports = compose(ChartMixin, ActivityCMSMixin)(Activity);
 
 // "resource_state": 2,
 // "athlete": { "id": 11876587, "resource_state": 1 },

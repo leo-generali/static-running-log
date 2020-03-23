@@ -39,6 +39,14 @@ module.exports = async () => {
     // Get the ID of the current activity
     const activityId = activity.id;
 
+    // Get any information from CMS about this activity
+    // If there isn't any data from CMS set it equal to an empty
+    // oject
+    const cmsInfo =
+      require("../../../db/cms.json").find(
+        cmsActivity => cmsActivity.activity_id === activityId
+      ) || {};
+
     // Get associated laps for an activity
     const activityLaps = laps
       .filter(lap => {
@@ -51,6 +59,9 @@ module.exports = async () => {
     // Create activity argument object
     const activityArguments = {
       ...activity,
+      cms: {
+        ...cmsInfo
+      },
       laps: [...activityLaps]
     };
 
