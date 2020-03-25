@@ -6,7 +6,7 @@ const compose = require("lodash/fp/compose");
 const { StatsMixin } = require("../mixins");
 
 const Week = require("./Week");
-const Activity = require("./Activity");
+// const Activity = require("./Activity");
 
 class Index {
   constructor(activities, type = Index.types()["ALL"]) {
@@ -40,7 +40,7 @@ class Index {
           .add(1, "weeks")
           .startOf("isoWeek");
 
-        groups[i] = [Activity.dummy(missingWeekDate)];
+        // groups[i] = [Activity.dummy(missingWeekDate)];
       }
     }
 
