@@ -2,9 +2,9 @@
 # from strava every two hours
 name: Scrape Strava Data
 
-on:
-  schedule:
-    - cron: 0 */2 * * *
+on: push
+  # schedule:
+  #   - cron: 0 */2 * * *
 
 jobs:
   scrape-data:
@@ -18,7 +18,7 @@ jobs:
 
       # Get the latest data from strava and save it
       - name: Fetch Latest Activity Data From Strava 🏃‍
-        uses: JamesIves/fetch-api-data-action@releases/v1
+        uses: JamesIves/fetch-api-data-action@1.0.4
         with:
           TOKEN_ENDPOINT: https://www.strava.com/api/v3/oauth/token
           TOKEN_CONFIGURATION: '{ "method": "POST", "body": {"client_id": "${{ secrets.client_id }}", "client_secret": "${{ secrets.client_secret }}"} }'
