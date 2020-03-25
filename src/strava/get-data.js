@@ -38,7 +38,6 @@ const saveDataToLocalDB = () => {
         strava.activities.listLaps(
           { id: id, access_token: token },
           (err, payload) => {
-            console.log(payload);
             db.laps.save(payload);
           }
         );

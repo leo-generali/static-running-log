@@ -1,11 +1,16 @@
+# Github action used to scrape data from
+# from strava every two hours
 name: Scrape Strava Data
+
 on:
   schedule:
-    - cron: '0 */2 * * *' #Every two hours!
+    - cron: 0 */2 * * *
+
 jobs:
   scrape-data:
-    runs-in: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
+      # Checkout the main branch
       - name: Checkout Branch 🛎️
         uses: actions/checkout@v2
         with:
