@@ -20,7 +20,7 @@ const WORKOUT_TYPE_MAP = {
   yoga: "Yoga"
 };
 
-class Activity {
+class Index {
   constructor(args) {
     this.id = args.id;
     this.name = args.name;
@@ -70,19 +70,6 @@ class Activity {
 
     return { activity, bg, bgHover, text };
   }
-
-  static dummy(date) {
-    const dummyArgs = {
-      id: "",
-      name: "",
-      date: date,
-      type: "",
-      moving_time: "",
-      distance: ""
-    };
-
-    return new Activity(dummyArgs);
-  }
 }
 
-module.exports = compose(ChartMixin, ActivityCMSMixin)(Activity);
+module.exports = compose(ChartMixin, ActivityCMSMixin)(Index);

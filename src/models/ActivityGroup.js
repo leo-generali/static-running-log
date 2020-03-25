@@ -8,6 +8,19 @@ const { StatsMixin } = require("../mixins");
 const Week = require("./Week");
 const Activity = require("./Activity");
 
+const dummyActivity = date => {
+  const dummyArgs = {
+    id: "",
+    name: "",
+    date: date,
+    type: "",
+    moving_time: "",
+    distance: ""
+  };
+
+  return new Activity(dummyArgs);
+};
+
 class Index {
   constructor(activities, type = Index.types()["ALL"]) {
     this._activities = activities;
@@ -40,7 +53,7 @@ class Index {
           .add(1, "weeks")
           .startOf("isoWeek");
 
-        groups[i] = [Activity.dummy(missingWeekDate)];
+        groups[i] = [dummyActivity(missingWeekDate)];
       }
     }
 
