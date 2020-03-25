@@ -4,10 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "concurrently --names \"🖥️,🖌️\" \"yarn site:watch\" \"BUNDLE=site yarn site:style\"",
-    "site:watch": "NODE_ENV=development eleventy --serve --port=1234",
-    "site:style": "node src/parcel",
-    "build": "NODE_ENV=production eleventy",
+    "dev": "concurrently --names \"🖥️,🖌️\" \"yarn dev:eleventy\" \"yarn dev:styles\"",
+    "dev:eleventy": "NODE_ENV=development eleventy --serve --port=1234",
+    "dev:styles": "parcel src/styles/index.css --out-dir ./_site/assets",
+    "build:eleventy": "NODE_ENV=production eleventy",
+    "build:styles": "parcel build src/styles/index.css --out-dir ./_site/assets",
+    "build": "yarn build:eleventy && yarn build:styles",
     "scrape": "node src/strava/get-data.js",
     "scrape:dev": "nodemon src/strava/get-data.js --ignore 'db/*.json'"
   },
