@@ -1,4 +1,4 @@
-const Activity = require("../../models/activity");
+const Activity = require("../../models/Activity");
 const laps = require("../../../db/laps.json");
 
 const getActivities = async () => {
