@@ -1,35 +1,8 @@
-const env = require("dotenv").config();
-const faunadb = require("faunadb");
 const Activity = require("../../models/activity");
 const laps = require("../../../db/laps.json");
 
-const q = faunadb.query;
-const client = new faunadb.Client({
-  secret: process.env.FAUNDA_DB_KEY
-});
-
-const getActivitiesFromFauna = async () => {
-  const { data: activityRefs } = await client.query(
-    q.Paginate(q.Match(q.Index("all_activities")))
-  );
-
-  const getAllActivityRefs = await activityRefs.map(ref => q.Get(ref));
-
-  const allActivities = await client.query(getAllActivityRefs);
-
-  return allActivities.map(({ data }) => data);
-};
-
 const getActivities = async () => {
-  if (process.env.NODE_ENV === "development") {
-    console.log("Getting activities from local DB cache");
-  } else {
-    console.log("Getting activities from online data store");
-  }
-
-  return process.env.NODE_ENV === "development"
-    ? await require("../../../db/activities.json")
-    : await getActivitiesFromFauna();
+  return await require("../../../db/activities.json");
 };
 
 module.exports = async () => {
