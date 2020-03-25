@@ -18,15 +18,11 @@ jobs:
 
       # Get the latest data from strava and save it
       - name: Fetch Latest Activity Data From Strava 🏃‍
-        uses: JamesIves/fetch-api-data-action@1.0.4
-        with:
-          TOKEN_ENDPOINT: https://www.strava.com/api/v3/oauth/token
-          TOKEN_CONFIGURATION: '{ "method": "POST", "body": {"client_id": "${{ secrets.client_id }}", "client_secret": "${{ secrets.client_secret }}"} }'
-          ENDPOINT: https://www.strava.com/api/v3/athlete/activities
-          CONFIGURATION: '{ "method": "GET", "headers": {"Authorization": "Bearer {{{ data.access_token }}}"} }'
-          SAVE_NAME: strava
-
-      - name: Build and Deploy 🚀
-        uses: mikeal/publish-to-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run scrape
+        # uses: JamesIves/fetch-api-data-action@1.0.4
+        # with:
+        #   TOKEN_ENDPOINT: https://www.strava.com/api/v3/oauth/token
+        #   TOKEN_CONFIGURATION: '{ "method": "POST", "body": {"client_id": "${{ secrets.client_id }}", "client_secret": "${{ secrets.client_secret }}"} }'
+        #   ENDPOINT: https://www.strava.com/api/v3/athlete/activities
+        #   CONFIGURATION: '{ "method": "GET", "headers": {"Authorization": "Bearer {{{ data.access_token }}}"} }'
+        #   SAVE_NAME: strava
