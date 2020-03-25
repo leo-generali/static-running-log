@@ -16,11 +16,11 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.10.0",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.1",
     "@fullhuman/postcss-purgecss": "^2.1.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.0.6",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
     "cheerio": "^1.0.0-rc.3",
     "concurrently": "^5.1.0",
     "cssnano": "^4.1.10",
@@ -45,9 +45,11 @@
     "tailwindcss": "^1.2.0"
   },
   "dependencies": {
+    "@babel/runtime": "^7.9.2",
     "faunadb": "^2.13.0",
     "navi": "^0.14.0",
     "navi-react": "^0.0.0",
+    "parcel-proxy-server": "^1.1.0",
     "react": "^16.8.0",
     "react-dom": "^16.13.0",
     "react-navi": "^0.14.3",

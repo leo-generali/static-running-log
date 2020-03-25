@@ -1,6 +1,6 @@
 import React from "react";
 
-const ActivityEdit = props => {
+const Activity = props => {
   return (
     <section>
       {Object.keys(props).map(key => (
@@ -10,4 +10,4 @@ const ActivityEdit = props => {
   );
 };
 
-export default ActivityEdit;
+export default Activity;

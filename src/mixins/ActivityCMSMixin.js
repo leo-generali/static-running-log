@@ -1,3 +1,6 @@
+const md = require("markdown-it")("commonmark");
+const valuesThatUseMarkdown = ["description"];
+
 const ActivityCMS = superclass =>
   class extends superclass {
     constructor(args) {
@@ -17,6 +20,8 @@ const ActivityCMS = superclass =>
     }
 
     cmsData(key) {
+      if (valuesThatUseMarkdown.includes(key)) return md.render(this.cms[key]);
+
       return this.cms[key];
     }
   };

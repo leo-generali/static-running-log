@@ -18,6 +18,11 @@
     @apply text-2xl font-semibold;
   }
 
+  strong,
+  b {
+    @apply font-semibold;
+  }
+
   a {
     @apply text-indigo-400 underline duration-100 transition font-semibold;
   }

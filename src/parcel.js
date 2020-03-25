@@ -1,3 +1,4 @@
+const ParcelProxyServer = require("parcel-proxy-server");
 const Bundler = require("parcel-bundler");
 const Path = require("path");
 
@@ -14,8 +15,24 @@ const cmsBundle = async () => {
     outDir: "./_site/cms"
   };
 
-  const bundler = new Bundler(entryFiles, options);
-  bundler.serve();
+  const server = new ParcelProxyServer({
+    entryPoint: entryFiles,
+    parcelOptions: options,
+    proxies: {
+      "/.netlify/functions/": {
+        target: "http://127.0.0.1:9000/"
+      }
+    }
+  });
+
+  server.bundler.on("buildEnd", () => {
+    console.log("Build completed!");
+  });
+
+  // start up the server
+  server.listen(1234, () => {
+    console.log("Parcel proxy server has started");
+  });
 };
 
 const siteBundle = async () => {

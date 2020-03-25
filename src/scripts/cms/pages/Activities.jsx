@@ -1,10 +1,6 @@
 import React from "react";
-import Activity from "../components/Activity";
+import ActivityLink from "../components/ActivityLink";
 import { useCurrentRoute } from "react-navi";
-
-const scrapeDataFromStrava = () => {
-  console.log("scraping data");
-};
 
 const Activities = () => {
   const route = useCurrentRoute();
@@ -17,24 +13,13 @@ const Activities = () => {
 
   return (
     <React.Fragment>
-      <section className="grid gap-4 mt-8 grid-cols-2">
-        <div className="p-4 bg-white rounded shadow">
-          <div className="flex items-center">
-            <button
-              onClick={scrapeDataFromStrava}
-              className="py-1 px-2 bg-strava text-white rounded transition duration-100 hover:bg-orange-700 "
-            >
-              Update Data
-            </button>
-            <p className="ml-auto">Get latest info from Strava</p>
-          </div>
-        </div>
+      <section className="grid gap-4 grid-cols-2">
         {activities.map(activity => (
           <div
             key={activity.id}
             className="p-4 bg-white rounded shadow col-span-2"
           >
-            <Activity {...activity} />
+            <ActivityLink {...activity} />
           </div>
         ))}
       </section>

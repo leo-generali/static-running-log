@@ -9,7 +9,8 @@ const client = new faunadb.Client({
 });
 
 exports.handler = async (event, context) => {
-  // Get the refs for all the activities in the database
+  console.log("Getting all activities");
+
   const { data: activityRefs } = await client.query(
     q.Paginate(q.Match(q.Index("all_activities")))
   );

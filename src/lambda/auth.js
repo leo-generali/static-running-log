@@ -7,11 +7,7 @@ exports.handler = async (event, context) => {
   });
 
   return {
-    statusCode: 302,
-    headers: {
-      Location: authorizationUri,
-      "Cache-Control": "no-cache" // Disable caching of this response
-    },
-    body: "" // return body for local dev
+    statusCode: 200,
+    body: JSON.stringify({ authorizationUri })
   };
 };

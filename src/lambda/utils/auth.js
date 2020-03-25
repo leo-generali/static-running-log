@@ -6,8 +6,8 @@ const {
   STRAVA_CLIENT_SECRET,
   STRAVA_ATHLETE_ID
 } = process.env;
-const SITE_URL = process.env.URL || "http://localhost:9000";
-const REDIRECT_URL = `${SITE_URL}/.netlify/functions/auth-callback`;
+const SITE_URL = process.env.URL || "http://localhost:1234";
+const REDIRECT_URL = `${SITE_URL}/cms`;
 
 const config = {
   /* values set in terminal session or in netlify environment variables */

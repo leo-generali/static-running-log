@@ -3,6 +3,8 @@ const purgecss = require("@fullhuman/postcss-purgecss")({
     "./src/site/**/*.njk",
     "./src/site/**/*.md",
     "./src/site/_data/*.js",
+    "./src/models/*.js",
+    "./src/mixins/*.js",
     "./src/scripts/cms/**/*.jsx"
   ],
 

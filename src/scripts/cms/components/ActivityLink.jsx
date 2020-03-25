@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-navi";
 
-const Activity = ({ name, id }) => {
+const ActivityLink = ({ name, id }) => {
   return (
     <React.Fragment>
       <p className="text-bold">{name}</p>
@@ -15,4 +15,4 @@ const Activity = ({ name, id }) => {
   );
 };
 
-export default Activity;
+export default ActivityLink;
