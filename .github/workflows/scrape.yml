@@ -1,0 +1,12 @@
+name: Scrape Strava Data
+on:
+  schedule:
+    - cron: '0 */2 * * *' #Every two hours!
+jobs:
+  scrape-data:
+    runs-in: ubuntu-latest
+    steps:
+      - name: Checkout Branch 🛎️
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
