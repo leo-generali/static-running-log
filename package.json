@@ -4,13 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev:site": "concurrently --names \"🖥️,🖌️\" \"yarn site:watch\" \"BUNDLE=site yarn site:style\"",
-    "dev:cms": "BUNDLE=cms node src/parcel.js",
+    "dev": "concurrently --names \"🖥️,🖌️\" \"yarn site:watch\" \"BUNDLE=site yarn site:style\"",
     "site:watch": "NODE_ENV=development eleventy --serve --port=1234",
     "site:style": "node src/parcel",
-    "site:build": "NODE_ENV=production node src/parcel & NODE_ENV=production eleventy",
-    "dev:lambda": "netlify-lambda serve src/lambda --babelrc false",
-    "build": "NODE_ENV=production eleventy & NODE_ENV=production BUNDLE=all node src/parcel",
+    "build": "NODE_ENV=production node src/parcel & NODE_ENV=production eleventy",
     "scrape": "node src/strava/get-data.js",
     "scrape:dev": "nodemon src/strava/get-data.js --ignore 'db/*.json'"
   },
@@ -49,7 +46,6 @@
     "faunadb": "^2.13.0",
     "navi": "^0.14.0",
     "navi-react": "^0.0.0",
-    "parcel-proxy-server": "^1.1.0",
     "react": "^16.8.0",
     "react-dom": "^16.13.0",
     "react-navi": "^0.14.3",
